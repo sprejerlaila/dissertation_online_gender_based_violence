@@ -1,0 +1,193 @@
+---
+title: "dictionary_analysis"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library("quanteda", quietly = TRUE, warn.conflicts = FALSE, verbose = FALSE)
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(ggplot2)
+library(ggpubr)
+library(reshape2)
+```
+
+```{r cars}
+tweets <- read.csv('/Users/lailasprejer/LSE/MY498 Capston Project/4.dictionaries/slurs_and_profiles3.csv', stringsAsFactors = FALSE)
+tweets$at_least_one <- ifelse(tweets$slurs == "[]", 0, 1)
+tweets$n_slurs <- sapply(strsplit(tweets$slurs_text, " "), length)
+corp <- corpus(tweets, text_field = "slurs_text")
+```
+
+```{r}
+mean(tweets$at_least_one)
+mean(tweets[tweets$target_precision %in% c("Medium","High"),]$at_least_one)
+mean(tweets[tweets$target_precision %in% c("High"),]$at_least_one)
+mean(tweets[tweets$at_least_one > 0,]$n_slurs)
+
+```
+
+# Gender
+
+```{r}
+g1 <- tweets %>%
+    group_by(directed_at_gender) %>%
+    summarise(pct_slurs = mean(at_least_one)) %>%
+  ggplot(aes(factor(directed_at_gender), y = pct_slurs)) +
+  geom_bar(stat = "identity") +
+  scale_y_continuous(limits = c(0,0.4)) +
+  labs(x = "All tweets",
+       y="") +
+  coord_flip()
+
+g2 <- tweets[tweets$target_precision %in% c("High","Medium"),] %>%
+    group_by(directed_at_gender) %>%
+    summarise(pct_slurs = mean(at_least_one)) %>%
+  ggplot(aes(factor(directed_at_gender), y = pct_slurs)) +
+  geom_bar(stat = "identity") +
+  scale_y_continuous(limits = c(0,0.4)) +
+  labs(x = "Med & High",
+       y="") +
+  coord_flip()
+
+g3 <- tweets[tweets$target_precision %in% c("High"),] %>%
+    group_by(directed_at_gender) %>%
+    summarise(pct_slurs = mean(at_least_one)) %>%
+  ggplot(aes(factor(directed_at_gender), y = pct_slurs)) +
+  geom_bar(stat = "identity") +
+  scale_y_continuous(limits = c(0,0.4)) +
+  labs(x = "High",
+       y= "Percentage of tweets containing slurs") +
+  coord_flip()
+
+figure <- ggarrange(g1, g2, g3,
+                    label.y = 1,
+                    common.legend = TRUE,
+                    ncol = 1)
+
+
+
+annotate_figure(figure, top = text_grob("Percentage of abusive tweets Dictionary",
+                                        face = "bold", size = 14))
+```
+
+# Interbloque
+
+```{r}
+tweets[tweets$directed_at_interbloque %in% c("Juntos por el Cambio","Frente de Todos"),] %>%
+    group_by(directed_at_interbloque) %>%
+    summarise(pct_slurs = mean(at_least_one))
+
+tweets[tweets$directed_at_interbloque %in% c("Juntos por el Cambio","Frente de Todos") & 
+         (tweets$target_precision %in% c("High","Medium")),] %>%
+    group_by(directed_at_interbloque) %>%
+    summarise(pct_slurs = mean(at_least_one))
+
+tweets[tweets$directed_at_interbloque %in% c("Juntos por el Cambio","Frente de Todos") & 
+         (tweets$target_precision %in% c("High")),] %>%
+    group_by(directed_at_interbloque) %>%
+    summarise(pct_slurs = mean(at_least_one))
+
+int_3 <- tweets[tweets$directed_at_interbloque %in% c("Juntos por el Cambio","Frente de Todos") & 
+         (tweets$target_precision %in% c("High")),] %>%
+    group_by(directed_at_interbloque) %>%
+    summarise(pct_slurs = mean(at_least_one)) %>%
+  ggplot(aes(factor(directed_at_interbloque), y = pct_slurs)) +
+  geom_bar(stat = "identity") +
+  labs(x = "",
+       y= "Percentage of tweets containing slurs") +
+  coord_flip()
+
+```
+
+
+
+```{r}
+freq <- tweets %>%
+  group_by(directed_at_screen_name) %>%
+  summarise(counts = n()) %>%
+  arrange(desc(counts))
+
+freq
+
+politicians <- freq[freq$counts > mean(freq$counts),]$directed_at_screen_name
+length(politicians)
+(table(tweets$directed_at_screen_name))
+
+tweets[tweets$directed_at_screen_name %in% politicians,] %>%
+    group_by(directed_at_screen_name) %>%
+    summarise(pct_slurs = mean(at_least_one)) %>%
+  arrange(desc(pct_slurs))
+  
+```
+
+
+```{r}
+slurs_screen_name <- tweets[tweets$directed_at_screen_name %in% politicians,] %>%
+    group_by(directed_at_screen_name) %>%
+    summarise(pct_slurs = mean(at_least_one),
+              directed_tweets = n(),
+              tweets_with_slurs = sum(at_least_one)) %>%
+  arrange(pct_slurs) %>%
+  top_n(n=20, pct_slurs)
+
+slured_politicians <- slurs_screen_name$directed_at_screen_name
+order_ = as.factor(slurs_screen_name$directed_at_screen_name)
+
+```
+
+```{r}
+slurs_screen_name <- tweets[tweets$directed_at_screen_name %in% slured_politicians,] %>%
+  group_by(directed_at_screen_name,at_least_one) %>%
+  summarise(count=n()) %>% 
+  mutate(perc=count/sum(count)*100)
+
+slurs_screen_name$at_least_one <- as.factor(slurs_screen_name$at_least_one)
+levels(slurs_screen_name$at_least_one) <- c("No slurs", "Slurs")
+
+ggplot(slurs_screen_name,
+       aes(factor(directed_at_screen_name, levels = order_), y = count, fill = at_least_one)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual("", values = c("No slurs" = "#00BFC4",
+                                             "Slurs" = "#F8766D")) +
+            coord_flip() +
+  labs(y = "Number of directed tweets", x = "") +
+  ggtitle("Politicians with the higher percentage of slurs") +
+  theme(legend.position = "bottom",
+        plot.title = element_text(hjust = 0.5))
+
+```
+
+
+# Keyness analysis
+
+```{r}
+twdfm <- dfm(corp, groups=c("directed_at_gender"))
+twdfm_med_high_precision <- dfm(corpus(tweets[tweets$target_precision %in% c("High","Medium"),], text_field = "slurs_text"),
+                                groups=c("directed_at_gender"))
+twdfm_high_precision <- dfm(corpus(tweets[tweets$target_precision == "High",], text_field = "slurs_text"),
+                                groups=c("directed_at_gender"))
+```
+
+```{r}
+k1 <- textstat_keyness(twdfm) %>% textplot_keyness() + ggtitle("All tweets")
+k2 <- textstat_keyness(twdfm_med_high_precision) %>% textplot_keyness()
+k3 <- textstat_keyness(twdfm_high_precision) %>% textplot_keyness() + ggtitle("High precision tweets")
+
+figure <- ggarrange(k1, k3,
+                    label.y = 1,
+                    common.legend = TRUE,
+                    ncol = 2)
+
+
+
+annotate_figure(figure, top = text_grob("Keyness analysis by gender",
+                                        face = "bold", size = 14))
+```
+
+
