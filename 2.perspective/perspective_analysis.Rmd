@@ -1,0 +1,307 @@
+---
+title: "perspective_analysis"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(reshape2)
+library(ggplot2)
+library(dplyr)
+library(sjPlot)
+```
+
+```{r}
+tweets <- read.csv('/Users/lailasprejer/LSE/MY498 Capston Project/2.perspective/all_scored_tweets_full_target_without_text3.csv', stringsAsFactors = FALSE)
+tweets <- tweets[!is.na(tweets$TOXICITY),]
+
+unique_tweets <- tweets[!duplicated(tweets$id),]
+tweets$toxic_dum <- ifelse(tweets$TOXICITY >= 0.30, 1, 0)
+unique_tweets$toxic_dum <- ifelse(unique_tweets$TOXICITY >= 0.30, 1, 0)
+```
+
+```{r}
+head(tweets)
+```
+
+
+```{r}
+print("0.30 cutoff")
+tweets$toxic_dum <- ifelse(tweets$TOXICITY >= 0.30, 1, 0)
+unique_tweets$toxic_dum <- ifelse(unique_tweets$TOXICITY >= 0.30, 1, 0)
+paste("overall % abuse: ",mean(unique_tweets$toxic_dum))
+paste("overall % abuse: ",mean(unique_tweets[unique_tweets$target_precision %in% c("Medium","High"),]$toxic_dum))
+paste("overall % abuse: ",mean(unique_tweets[unique_tweets$target_precision %in% c("High"),]$toxic_dum))
+
+paste("F all %: ", mean(tweets[tweets$directed_at_gender == "F",]$toxic_dum))
+paste("M all %: ", mean(tweets[tweets$directed_at_gender == "M",]$toxic_dum))
+
+paste("F Med High %: ", mean(tweets[(tweets$directed_at_gender == "F")&(tweets$target_precision != "Low"),]$toxic_dum))
+paste("M Med High %: ", mean(tweets[(tweets$directed_at_gender == "M")&(tweets$target_precision != "Low"),]$toxic_dum))
+
+paste("F High %: ", mean(tweets[(tweets$directed_at_gender == "F")&(tweets$target_precision == "High"),]$toxic_dum))
+paste("M High %: ", mean(tweets[(tweets$directed_at_gender == "M")&(tweets$target_precision == "High"),]$toxic_dum))
+```
+
+
+```{r}
+annotation1 <- read.csv('../3.modeling/annotate_1.csv')
+annotation2 <- read.csv('../3.modeling/annotate_2.csv')
+annotation <- rbind(annotation1,annotation2)
+annotation['id'] <- annotation$id_str
+head(annotation)
+mean(annotation$Main.category == "Hostility")
+mean(annotation$Main.category == "Criticism")
+```
+
+```{r}
+compare <- merge(annotation, tweets[,c('id','TOXICITY','toxic_dum')], how='left', all.x = TRUE)
+compare <- compare[!is.na(compare$TOXICITY),]
+head(compare)
+```
+
+```{r}
+compare_p <- compare %>% 
+  ggplot(aes(x=Main.category,y=TOXICITY)) +
+  geom_boxplot() + coord_flip() +
+  labs(x = "",
+       y = "Toxicity score by Perspective",
+       title = "Scores by annotated category") +
+  theme(plot.title = element_text(hjust = 0.5),
+        legend.position = "None")
+compare_p
+```
+
+```{r}
+# AUC
+set.seed(3)
+mean(sample(compare[compare$Main.category == 'Hostility',]$TOXICITY,2000,replace=T) > sample(compare[compare$Main.category != 'Hostility',]$TOXICITY,2000,replace=T))
+
+# Does this mean that I should use toxicity with a threshold of 0.25?!
+paste("Accuracy: ",1 - sum(c((compare$TOXICITY>0.3)&(compare$Main.category!="Hostility"),
+      (compare$TOXICITY<0.3)&(compare$Main.category=="Hostility"))) / nrow(compare))
+paste("Precision: ",sum((compare$TOXICITY>0.3)&(compare$Main.category=="Hostility")) / sum(compare$TOXICITY > 0.3))
+paste("Recall: ",sum(c((compare$TOXICITY>0.3)&(compare$Main.category=="Hostility")) / sum(compare$Main.category == "Hostility")))
+
+sum(c((compare$TOXICITY>0.3)&(compare$Main.category!="Hostility")))/nrow(compare)
+sum(c((compare$TOXICITY>0.3)&(compare$Main.category=="Hostility")))/nrow(compare)
+sum(c((compare$TOXICITY<0.3)&(compare$Main.category!="Hostility")))/nrow(compare)
+sum(c((compare$TOXICITY<0.3)&(compare$Main.category=="Hostility")))/nrow(compare)
+
+```
+
+```{r}
+### Diagnostics plot
+accuracies <- list()
+precisions <- list()
+recalls <- list()
+f1s <- list()
+
+paste("Accuracy: ",1 - sum(c((compare$TOXICITY>0.3)&(compare$Main.category!="Hostility"),
+      (compare$TOXICITY<0.3)&(compare$Main.category=="Hostility"))) / nrow(compare))
+paste("Precision: ",sum((compare$TOXICITY>0.3)&(compare$Main.category=="Hostility")) / sum(compare$TOXICITY > 0.3))
+paste("Recall: ",sum(c((compare$TOXICITY>0.3)&(compare$Main.category=="Hostility")) / sum(compare$Main.category == "Hostility")))
+n <- 0
+for (i in c(0.20, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8)){
+  n <- n + 1
+  accuracies[n] <- 1 - sum(c((compare$TOXICITY>i)&(compare$Main.category!="Hostility"), (compare$TOXICITY<i)&(compare$Main.category=="Hostility"))) / nrow(compare)
+  pr <- sum((compare$TOXICITY>i)&(compare$Main.category=="Hostility")) / sum(compare$TOXICITY > i)
+  precisions[n] <- pr
+  rec <- sum(c((compare$TOXICITY>i)&(compare$Main.category=="Hostility")) / sum(compare$Main.category == "Hostility"))
+  recalls[n] <- rec
+  f1s[n] <- 2 * pr * rec / (pr + rec)
+}
+
+accuracies <- unlist(accuracies)
+precisions <- unlist(precisions)
+recalls <- unlist(recalls)
+f1s <- unlist(f1s)
+
+diagnostics <- data.frame(Threshold = c(0.20, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8),
+                          Accuracy = accuracies,
+                          Precision = precisions,
+                          Recall = recalls,
+                          F1 = f1s)
+diagnostics_plot <- diagnostics %>% gather(key = "Metric", value = "Value", -Threshold) %>%
+  ggplot(aes(x = Threshold, y = Value)) +
+  geom_line(aes(color = Metric)) +
+  ggtitle("Performance under different thresholds") +
+  theme(plot.title = element_text(hjust = 0.5))
+
+diagnostics_plot
+```
+
+```{r}
+figure <- ggarrange(compare1, diagnostics_plot,
+                    label.y = 1,
+                    ncol = 2)
+
+
+
+annotate_figure(figure, top = text_grob("Perspective evaluation",
+                                        face = "bold", size = 14))
+```
+
+```{r}
+compare[(compare$TOXICITY>0.30)&(compare$Main.category=="None"),c("id","TOXICITY","text")]
+```
+
+```{r}
+# False negatives
+compare[(compare$TOXICITY<0.15)&(compare$Main.category=="Hostility"),c("id","TOXICITY","text")]
+```
+
+```{r}
+mean(tweets$TOXICITY>0.3)
+tweets[tweets$directed_at_gender != "",] %>% 
+  ggplot(aes(x=directed_at_gender,y=TOXICITY, fill=directed_at_gender)) +
+  geom_boxplot()
+
+tweets[tweets$directed_at_gender != "",] %>% 
+  ggplot(aes(x=directed_at_gender,y=PROFANITY_EXPERIMENTAL, fill=directed_at_gender)) +
+  geom_boxplot()
+```
+
+
+```{r}
+freq <- tweets %>%
+  group_by(directed_at_screen_name) %>%
+  summarise(counts = n()) %>%
+  arrange(desc(counts))
+
+politicians <- freq[freq$counts > mean(freq$counts),]$directed_at_screen_name
+```
+
+
+```{r}
+abuse_screen_name <- tweets[tweets$directed_at_screen_name %in% politicians,] %>%
+    group_by(directed_at_screen_name) %>%
+    summarise(pct_abuse = mean(toxic_dum),
+              directed_tweets = n(),
+              n_abuse = sum(toxic_dum)) %>%
+  arrange(pct_abuse) %>%
+  top_n(n=20, pct_abuse)
+
+abuse_politicians <- abuse_screen_name$directed_at_screen_name
+order_ = as.factor(abuse_screen_name$directed_at_screen_name)
+
+abuse_screen_name
+```
+
+```{r}
+abuse_screen_name <- tweets[tweets$directed_at_screen_name %in% abuse_politicians,] %>%
+  group_by(directed_at_screen_name,toxic_dum) %>%
+  summarise(count=n()) %>% 
+  mutate(perc=count/sum(count)*100)
+
+abuse_screen_name$toxic_dum <- as.factor(abuse_screen_name$toxic_dum)
+levels(abuse_screen_name$toxic_dum) <- c("No abuse", "Abuse")
+
+ggplot(abuse_screen_name,
+       aes(factor(directed_at_screen_name, levels = order_), y = count, fill = toxic_dum)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual("", values = c("No abuse" = "#00BFC4",
+                                             "Abuse" = "#F8766D")) +
+  #scale_x_discrete(breaks = 1:k, labels=c(labels)) +
+  #geom_hline(yintercept=50, linetype="dotted") + 
+            coord_flip() +
+  labs(y = "Number of directed tweets", x = "") +
+  ggtitle("Politicians with the highest percentage of abuse (Perspective)") +
+  theme(legend.position = "bottom",
+  #       axis.text.y = element_text(colour = colors),
+        plot.title = element_text(hjust = 0.5))
+
+```
+
+```{r}
+test <- tweets[tweets$directed_at_screen_name != "",] %>%
+    group_by(directed_at_screen_name, directed_at_gender) %>%
+    summarise(average_toxic = mean(toxic_dum))
+
+mean(tweets[tweets$directed_at_gender=="F",]$toxic_dum)
+mean(tweets[tweets$directed_at_gender=="M",]$toxic_dum)
+
+mean(test[test$directed_at_gender=="F",]$average_toxic)
+mean(test[test$directed_at_gender=="M",]$average_toxic)
+
+names(tweets)
+
+```
+
+```{r}
+order <- test %>%
+  arrange(desc(average_toxic)) %>%
+  top_n(n=10, average_toxic)
+
+order
+```
+
+```{r}
+table(tweets$directed_at_screen_name)
+```
+
+## Analysis by party
+
+```{r}
+fdt <- tweets[(tweets$directed_at_gender != "")&(tweets$directed_at_interbloque == "Frente de Todos"),] %>% 
+  ggplot(aes(x=directed_at_gender,y=TOXICITY, fill=directed_at_gender)) +
+  geom_boxplot(show.legend = FALSE) + 
+  #facet_wrap(~directed_at_gender) +
+  ylim(0,0.8)+
+  labs(x = "",
+       y = "",
+       title = "Frente de Todos") +
+  theme(plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5),
+        axis.title.y=element_blank())
+
+jpc <- tweets[(tweets$directed_at_gender != "")&(tweets$directed_at_interbloque == "Juntos por el Cambio"),] %>% 
+  ggplot(aes(x=directed_at_gender,y=TOXICITY, fill=directed_at_gender)) +
+  geom_boxplot(show.legend = FALSE) + 
+  #facet_wrap(~directed_at_gender) +
+  ylim(0,0.8)+
+  labs(x = "",
+       y = "",
+       title = "Juntos por el Cambio") +
+  theme(plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5),
+        axis.title.y=element_blank())
+
+figure <- ggarrange(fdt, jpc,
+                    label.y = 1,
+                    nrow = 1)
+
+annotate_figure(figure, top = text_grob("Percentage of abusive tweets by gender (Perspective)",
+                                        face = "bold", size = 14))
+```
+
+```{r}
+tweets[tweets$directed_at_interbloque %in% c('Frente de Todos','Juntos por el Cambio'),] %>%
+    group_by(directed_at_interbloque, directed_at_gender) %>%
+    summarise(pct_abuse = mean(toxic_dum))
+
+tweets[tweets$directed_at_interbloque %in% c('Frente de Todos','Juntos por el Cambio'),] %>%
+    group_by(directed_at_interbloque, directed_at_gender) %>%
+    summarise(pct_abuse = mean(toxic_dum)) %>%
+  ggplot(aes(factor(directed_at_gender), y = pct_abuse)) +
+  facet_wrap(~directed_at_interbloque, ncol = 1) +
+  geom_bar(stat = "identity") +
+  ggtitle("Percentage of abusive tweets by gender and party") +
+  theme(plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5),
+        axis.title.y=element_blank()) +
+  labs(x = "",
+       y= "Percentage of abusive tweets") +
+  coord_flip()
+```
+
+
+```{r}
+metadata <- read.csv("/Users/lailasprejer/LSE/MY498 Capston Project/0.data/metadata.csv", stringsAsFactors=F)
+head(metadata)
+
+```
+
