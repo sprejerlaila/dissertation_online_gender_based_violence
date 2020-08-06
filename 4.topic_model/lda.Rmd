@@ -1,0 +1,625 @@
+---
+title: "topic_models_politicians"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(reshape2)
+library(ggplot2)
+library(ggpubr)
+library(dplyr)
+library(quanteda)
+library(topicmodels)
+library(coefplot)
+library(sjPlot)
+#library(jtools)
+```
+
+```{r}
+# Crossvalidate models
+# https://stackoverflow.com/questions/21355156/topic-models-cross-validation-with-loglikelihood-or-perplexity
+load("results_df.Rdata")
+ggplot(results_df, aes(x = k, y = perplexity)) +
+   geom_point() +
+   geom_smooth(se = FALSE) +
+   ggtitle("5-fold cross-validation of topic modelling with the 'Associated Press' dataset",
+           "(ie five different models fit for each candidate number of topics)") +
+   labs(x = "Candidate number of topics", y = "Perplexity when fitting the trained model to the hold-out set")
+
+ggplot(results_df, aes(x = k, y = loglik)) +
+   geom_point() +
+   geom_smooth(se = FALSE) +
+   ggtitle("5-fold cross-validation of topic modelling with the 'Associated Press' dataset",
+           "(ie five different models fit for each candidate number of topics)") +
+   labs(x = "Candidate number of topics", y = "Perplexity when fitting the trained model to the hold-out set")
+```
+
+```{r}
+tweets <- read.csv('replies.csv', stringsAsFactors = FALSE)
+
+unique_tweets <- unique(tweets$in_reply_to_status)
+```
+
+```{r}
+corpus <- corpus(unique_tweets)
+cdfm <- dfm(corpus, remove=stopwords("spanish"), verbose=TRUE,
+               remove_punct=TRUE, remove_numbers=TRUE)
+cdfm <- dfm_trim(cdfm, min_docfreq = 2)
+
+doc_ntokens <- rowSums(cdfm)
+drop_idx <- which(doc_ntokens==0)
+
+cdfm <- cdfm[-drop_idx,]
+```
+
+
+```{r}
+# # Run final model
+# K <- 30
+# lda <- LDA(cdfm, k = K, method = "Gibbs", 
+#                 control = list(verbose=25L, seed = 123, burnin = 100, iter = 500))
+
+#save(lda, file="lda.Rdata")
+
+load('lda.Rdata')
+```
+
+```{r}
+words = list()
+terms <- get_terms(lda, 15)
+for (i in (1:30)){
+  words[i] <- paste(terms[,i], collapse=", ")}
+
+words <- unlist(words)
+
+words
+```
+
+
+```{r}
+#Evaluate coherence
+topic_names <- c("1.Corruption, Justice, Nisman",
+            "2.Alberto and Cristina, Peronismo",
+            "3.Retirement?",
+            "4.Happy day, year, best wishes",
+            "5.Democracy, Dictatorship, Venezuela",
+            "6.Hunger plan",
+            "7.We can do it",
+            "8.Malvinas, soberanity",
+            "9.Taxes and field",
+            "10.Public debt",
+            "11.Media, rev. viejas",
+            "12.Victims and memory",
+            "13.Santa Fe, state",
+            "14.Develpment policy",
+            "15.Money, country, thanks",
+            "16.Build Argentina",
+            "17.Macri and Cambiemos",
+            "18.Other",
+            "19.Retirement",
+            "20.Pairlament, quorum, law",
+            "21.Plans, organization",
+            "22.Dollars, money, millions",
+            "23.Build Argentina",
+            "24.City, neighbours, build",
+            "25.Security, ministry, information",
+            "26.Congratulations, new government",
+            "27.Women rights",
+            "28.Solidarity and salary",
+            "29.Other",
+            "30.Big family, compromise"
+            )
+
+topic_to_name <- data.frame("topic"=seq(1,30),"topic_name"=topic_names, "words" = words)
+write.csv(topic_to_name,"topic_words.csv")
+```
+
+```{r}
+topics <- get_topics(lda, 1)
+topics_df <- data.frame(unique_tweets[-drop_idx],topics)
+
+colnames(topics_df) <- c("in_reply_to_status","topic")
+```
+
+
+```{r}
+# tweets_topics <- merge(tweets, topics_df, on='in_reply_to_status',how='left', all.x = TRUE,all.y = TRUE)
+# tweets_topics <- merge(tweets_topics,topic_to_name, on='topic',how='left')
+# tweets_topics$toxic_dum <- ifelse(tweets_topics$TOXICITY >= 0.30, 1, 0)
+# save(tweets_topics, file="tweets_topics.Rdata")
+load('tweets_topics.Rdata')
+
+metadata <- read.csv("/Users/lailasprejer/LSE/MY498 Capston Project/0.data/metadata.csv", stringsAsFactors=F)
+metadata$directed_at_screen_name <- metadata$screen_name
+head(tweets_topics)
+tweets_topics <- merge(tweets_topics, metadata[c('directed_at_screen_name','age','age_bucket','followers_count')],
+                                               how='left',
+                                               on='directed_at_screen_name')
+```
+
+
+```{r}
+head(tweets_topics)
+nrow(tweets_topics)
+nrow(tweets_topics[is.na(tweets_topics$topic),])
+tweets_topics <- tweets_topics[!is.na(tweets_topics$topic),]
+# save(tweets_topics, file="tweets_topics.Rdata")
+
+tweets_topics[(tweets_topics$topic == 29),]
+
+tweets_topics[(tweets_topics$topic == 21)&
+                (tweets_topics$directed_at_gender == "F"),c("toxic_dum","text","in_reply_to_status")]
+```
+
+```{r}
+# Abuse difference, and they are all replies! 
+mean(tweets_topics[tweets_topics$directed_at_gender == "F",]$toxic_dum)
+mean(tweets_topics[tweets_topics$directed_at_gender == "M",]$toxic_dum)
+
+```
+
+```{r}
+# written_tweets <- unique(tweets_topics[c('in_reply_to_status_id','in_reply_to_status','topic','topic_name','directed_at_screen_name','directed_at_interbloque','directed_at_gender')])
+# save(written_tweets, file="written_tweets.Rdata")
+load('written_tweets.Rdata')
+```
+
+```{r}
+# Topics more relp
+order_tweeted <- written_tweets %>%
+  count(topic_name) %>%
+  top_n(n=30, n) %>%
+  arrange(n)
+
+#color_interbloque <- order_directed$directed_at_interbloque
+order_tweeted <- as.factor(order_tweeted$topic_name)
+
+plot_tweeted <- written_tweets %>%
+  count(topic_name) %>%
+  ggplot(., aes(x=factor(topic_name, levels = order_tweeted), y=n)) +
+  #scale_fill_manual("", values = c("Frente de Todos" = "#619CFF",
+  #                                 "Juntos por el Cambio" = "#F5BD1F",
+  #                                 "PTS -Frente de Izquierda" = "#F8766D",
+  #                                 "Federal" = "#7CAE00"))+
+  geom_bar(stat='identity', show.legend = FALSE) +
+  labs(x = "",
+       y = "",
+       title = "") +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.ticks.x=element_blank(),
+        axis.text.x=element_text(colour="white"))+
+  coord_flip()
+
+plot_tweeted_F <- written_tweets[written_tweets$directed_at_gender=="F",] %>%
+  count(topic_name) %>%
+  ggplot(., aes(x=factor(topic_name, levels = order_tweeted), y=n)) +
+  #scale_fill_manual("", values = c("Frente de Todos" = "#619CFF",
+  #                                 "Juntos por el Cambio" = "#F5BD1F",
+  #                                 "PTS -Frente de Izquierda" = "#F8766D",
+  #                                 "Federal" = "#7CAE00"))+
+  geom_bar(stat='identity', show.legend = FALSE) +
+  labs(x = "",
+       y = "",
+       title = "Tweeted F") +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  coord_flip()
+
+plot_tweeted_M <- written_tweets[written_tweets$directed_at_gender=="M",] %>%
+  count(topic_name) %>%
+  ggplot(., aes(x=factor(topic_name, levels = order_tweeted), y=n)) +
+  #scale_fill_manual("", values = c("Frente de Todos" = "#619CFF",
+  #                                 "Juntos por el Cambio" = "#F5BD1F",
+  #                                 "PTS -Frente de Izquierda" = "#F8766D",
+  #                                 "Federal" = "#7CAE00"))+
+  geom_bar(stat='identity', show.legend = FALSE) +
+  labs(x = "",
+       y = "",
+       title = "Tweeted M") +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  coord_flip()
+
+
+figure <- ggarrange(plot_tweeted, plot_tweeted_F, plot_tweeted_M,
+                    label.y = 1,
+                    common.legend = TRUE,
+                    nrow = 1)
+
+figure
+```
+
+
+
+
+```{r}
+plot_tweeted_FdT <- written_tweets[written_tweets$directed_at_interbloque=="Frente de Todos",] %>%
+  count(topic_name) %>%
+  ggplot(., aes(x=factor(topic_name, levels = order_tweeted), y=n)) +
+  geom_bar(stat='identity', show.legend = FALSE) +
+  labs(x = "",
+       y = "",
+       title = "Tweeted FdT") +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  coord_flip()
+
+plot_tweeted_JpC <- written_tweets[written_tweets$directed_at_interbloque=="Juntos por el Cambio",] %>%
+  count(topic_name) %>%
+  ggplot(., aes(x=factor(topic_name, levels = order_tweeted), y=n)) +
+  geom_bar(stat='identity', show.legend = FALSE) +
+  labs(x = "",
+       y = "",
+       title = "Tweeted JpC") +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  coord_flip()
+
+
+figure <- ggarrange(plot_tweeted, plot_tweeted_FdT, plot_tweeted_JpC,
+                    label.y = 1,
+                    common.legend = TRUE,
+                    nrow = 1)
+
+figure
+```
+
+```{r}
+figure <- ggarrange(plot_tweeted, plot_tweeted_F, plot_tweeted_M, plot_tweeted_FdT, plot_tweeted_JpC,
+                    widths = c(2,1,1,1,1),
+                    label.y = 1,
+                    common.legend = TRUE,
+                    nrow = 1)
+
+figure
+```
+
+
+```{r}
+plot_tweeted_FdT_F <- written_tweets[(written_tweets$directed_at_interbloque=="Frente de Todos")&
+                                     (written_tweets$directed_at_gender=="F"),] %>%
+  count(topic_name) %>%
+  ggplot(., aes(x=factor(topic_name, levels = order_tweeted), y=n)) +
+  geom_bar(stat='identity', show.legend = FALSE) +
+  labs(x = "",
+       y = "",
+       title = "Written tweets FdT F") +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  coord_flip()
+
+plot_tweeted_FdT_M <- written_tweets[(written_tweets$directed_at_interbloque=="Frente de Todos")&
+                                     (written_tweets$directed_at_gender=="M"),] %>%
+  count(topic_name) %>%
+  ggplot(., aes(x=factor(topic_name, levels = order_tweeted), y=n)) +
+  geom_bar(stat='identity', show.legend = FALSE) +
+  labs(x = "",
+       y = "",
+       title = "Written tweets FdT M") +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  coord_flip()
+
+
+
+figure <- ggarrange(plot_tweeted, plot_tweeted_FdT_F, plot_tweeted_FdT_M,
+                    label.y = 1,
+                    common.legend = TRUE,
+                    nrow = 1)
+
+figure
+```
+
+```{r}
+plot_tweeted_FdT_F <- written_tweets[(written_tweets$directed_at_interbloque=="Juntos por el Cambio")&
+                                     (written_tweets$directed_at_gender=="F"),] %>%
+  count(topic_name) %>%
+  ggplot(., aes(x=factor(topic_name, levels = order_tweeted), y=n)) +
+  geom_bar(stat='identity', show.legend = FALSE) +
+  labs(x = "",
+       y = "",
+       title = "Written tweets JpC F") +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  coord_flip()
+
+plot_tweeted_FdT_M <- written_tweets[(written_tweets$directed_at_interbloque=="Juntos por el Cambio")&
+                                     (written_tweets$directed_at_gender=="M"),] %>%
+  count(topic_name) %>%
+  ggplot(., aes(x=factor(topic_name, levels = order_tweeted), y=n)) +
+  geom_bar(stat='identity', show.legend = FALSE) +
+  labs(x = "",
+       y = "",
+       title = "Written tweets JpC M") +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  coord_flip()
+
+
+
+figure <- ggarrange(plot_tweeted, plot_tweeted_FdT_F, plot_tweeted_FdT_M,
+                    label.y = 1,
+                    common.legend = TRUE,
+                    nrow = 1)
+
+figure
+```
+
+```{r}
+abuse_topics <- tweets_topics %>%
+    group_by(topic_name) %>%
+    summarise(pct_abuse = mean(toxic_dum),
+              directed_tweets = n(),
+              n_abuse = sum(toxic_dum)) %>%
+  arrange(pct_abuse) %>%
+  top_n(n=30, pct_abuse)
+
+order_ = as.factor(abuse_topics$topic_name)
+
+abuse_topics
+
+abuse_topics %>%
+  ggplot(., aes(x=factor(topic_name, levels = order_), y=pct_abuse)) +
+  labs(x = "",
+       y = "",
+       title = "Written tweets JpC F") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  coord_flip(ylim=c(0.2,0.5))
+
+abuse_topics <- tweets_topics %>%
+  group_by(topic_name,toxic_dum) %>%
+  summarise(count=n()) %>% 
+  mutate(perc=count/sum(count)*100)
+
+abuse_topics$toxic_dum <- as.factor(abuse_topics$toxic_dum)
+levels(abuse_topics$toxic_dum) <- c("No abuse", "Abuse")
+
+ggplot(abuse_topics,
+       aes(factor(topic_name, levels = order_), y = count, fill = toxic_dum)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual("", values = c("No abuse" = "#00BFC4",
+                                             "Abuse" = "#F8766D")) +
+            coord_flip() +
+  labs(y = "Number of directed tweets", x = "") +
+  ggtitle("Abuse by topic for All politicians") +
+  theme(legend.position = "bottom",
+        plot.title = element_text(hjust = 0.5))
+
+```
+
+```{r}
+abuse_topics <- tweets_topics %>%
+    group_by(topic_name) %>%
+    summarise(pct_abuse = mean(toxic_dum),
+              directed_tweets = n(),
+              n_abuse = sum(toxic_dum)) %>%
+  arrange(pct_abuse) %>%
+  top_n(n=30, pct_abuse)
+
+order_ = as.factor(abuse_topics$topic_name)
+
+abuse_all <- abuse_topics %>%
+  ggplot(., aes(x=factor(topic_name, levels = order_), y=pct_abuse)) +
+  geom_bar(stat='identity')+#, show.legend = FALSE) +
+  labs(x = "",
+       y = "",
+       title = "") +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.ticks.x=element_blank(),
+        axis.text.x=element_text(colour="white")) +
+  coord_flip(ylim=c(0.2,0.5))
+```
+
+```{r}
+abuse_topics_F <- tweets_topics[tweets_topics$in_reply_to_gender == "F",] %>%
+    group_by(topic_name) %>%
+    summarise(pct_abuse = mean(toxic_dum),
+              directed_tweets = n(),
+              n_abuse = sum(toxic_dum)) %>%
+  arrange(pct_abuse)
+
+
+abuse_F <- abuse_topics_F %>%
+  ggplot(., aes(x=factor(topic_name, levels = order_), y=pct_abuse)) +
+  geom_bar(stat='identity')+#, show.legend = FALSE) +
+  labs(x = "",
+       y = "",
+       title = "Replies to Female") +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  coord_flip(ylim=c(0.2,0.6))
+
+abuse_topics_M <- tweets_topics[tweets_topics$in_reply_to_gender == "M",] %>%
+    group_by(topic_name) %>%
+    summarise(pct_abuse = mean(toxic_dum),
+              directed_tweets = n(),
+              n_abuse = sum(toxic_dum)) %>%
+  arrange(pct_abuse)
+
+
+abuse_M <- abuse_topics_M %>%
+  ggplot(., aes(x=factor(topic_name, levels = order_), y=pct_abuse)) +
+  geom_bar(stat='identity')+#, show.legend = FALSE) +
+  labs(x = "",
+       y = "",
+       title = "Replies to Male") +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  coord_flip(ylim=c(0.2,0.6))
+```
+
+```{r}
+figure <- ggarrange(abuse_all, abuse_F, abuse_M,
+                    label.y = 1,
+                    common.legend = TRUE,
+                    nrow = 1)
+ 
+annotate_figure(figure, top = text_grob("                                      Percentage of abusive replies",
+                                        face = "bold", size = 14))
+```
+
+
+```{r}
+abuse_topics <- tweets_topics[tweets_topics$in_reply_to_gender == "F",] %>%
+    group_by(topic_name) %>%
+    summarise(pct_abuse = mean(toxic_dum),
+              directed_tweets = n(),
+              n_abuse = sum(toxic_dum)) %>%
+  arrange(pct_abuse) %>%
+  top_n(n=30, pct_abuse)
+
+abuse_topics <- tweets_topics[tweets_topics$in_reply_to_gender == "F",] %>%
+  group_by(topic_name,toxic_dum) %>%
+  summarise(count=n()) %>% 
+  mutate(perc=count/sum(count)*100)
+
+abuse_topics$toxic_dum <- as.factor(abuse_topics$toxic_dum)
+levels(abuse_topics$toxic_dum) <- c("No abuse", "Abuse")
+
+abuse_topics_F <- ggplot(abuse_topics,
+       aes(factor(topic_name, levels = order_), y = count, fill = toxic_dum)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual("", values = c("No abuse" = "#00BFC4",
+                                             "Abuse" = "#F8766D")) +
+            coord_flip() +
+  labs(y = "Number of directed tweets", x = "") +
+  ggtitle("Abuse by topic for Women politicians") +
+  theme(legend.position = "bottom",
+  #       axis.text.y = element_text(colour = colors),
+        plot.title = element_text(hjust = 0.5))
+
+abuse_topics_F
+
+```
+
+```{r}
+abuse_topics <- tweets_topics[tweets_topics$in_reply_to_gender == "M",] %>%
+  group_by(topic_name,toxic_dum) %>%
+  summarise(count=n()) %>% 
+  mutate(perc=count/sum(count)*100)
+
+abuse_topics$toxic_dum <- as.factor(abuse_topics$toxic_dum)
+levels(abuse_topics$toxic_dum) <- c("No abuse", "Abuse")
+
+abuse_topics_M <- ggplot(abuse_topics,
+       aes(factor(topic_name, levels = order_), y = count, fill = toxic_dum)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual("", values = c("No abuse" = "#00BFC4",
+                                             "Abuse" = "#F8766D")) +
+            coord_flip() +
+  labs(y = "Number of directed tweets", x = "") +
+  ggtitle("Abuse by topic for Men politicians") +
+  theme(legend.position = "bottom",
+  #       axis.text.y = element_text(colour = colors),
+        plot.title = element_text(hjust = 0.5))
+
+abuse_topics_M
+```
+
+
+# Abuse analysis
+```{r}
+tweets <- read.csv('topic_models_politicians.csv', stringsAsFactors = FALSE)
+```
+
+```{r}
+tweets$toxic_dum <- ifelse(tweets$TOXICITY >= 0.30, 1, 0)
+
+mean(tweets[tweets$directed_at_gender == "F",]$toxic_dum)
+mean(tweets[tweets$directed_at_gender == "M",]$toxic_dum)
+
+mean(tweets[(tweets$directed_at_gender == "F")&(tweets$target_precision != "Low"),]$toxic_dum)
+mean(tweets[(tweets$directed_at_gender == "M")&(tweets$target_precision != "Low"),]$toxic_dum)
+
+mean(tweets[(tweets$directed_at_gender == "F")&(tweets$target_precision == "High"),]$toxic_dum)
+mean(tweets[(tweets$directed_at_gender == "M")&(tweets$target_precision == "High"),]$toxic_dum)
+```
+
+```{r}
+abuse_topics <- tweets %>%
+    group_by(words20) %>%
+    summarise(pct_abuse = mean(toxic_dum),
+              directed_tweets = n(),
+              n_abuse = sum(toxic_dum)) %>%
+  arrange(pct_abuse) %>%
+  top_n(n=30, pct_abuse)
+
+order_ = as.factor(abuse_topics$words20)
+
+abuse_topics
+```
+
+```{r}
+abuse_topics <- tweets[tweets$in_reply_to_gender == "F",] %>%
+    group_by(words20) %>%
+    summarise(pct_abuse = mean(toxic_dum),
+              directed_tweets = n(),
+              n_abuse = sum(toxic_dum)) %>%
+  arrange(pct_abuse) %>%
+  top_n(n=30, pct_abuse)
+
+order_ = as.factor(abuse_topics$words20)
+
+abuse_topics
+```
+
+```{r}
+abuse_topics <- tweets[tweets$in_reply_to_gender == "M",] %>%
+    group_by(words20) %>%
+    summarise(pct_abuse = mean(toxic_dum),
+              directed_tweets = n(),
+              n_abuse = sum(toxic_dum)) %>%
+  arrange(pct_abuse) %>%
+  top_n(n=30, pct_abuse)
+
+order_ = as.factor(abuse_topics$words20)
+
+abuse_topics
+```
+
+```{r}
+abuse_topics <- tweets %>%
+  group_by(words20,toxic_dum) %>%
+  summarise(count=n()) %>% 
+  mutate(perc=count/sum(count)*100)
+
+abuse_topics$toxic_dum <- as.factor(abuse_topics$toxic_dum)
+levels(abuse_topics$toxic_dum) <- c("No abuse", "Abuse")
+
+ggplot(abuse_topics,
+       aes(factor(words20, levels = order_), y = count, fill = toxic_dum)) +
+  geom_bar(stat = "identity") +
+  scale_fill_manual("", values = c("No abuse" = "#00BFC4",
+                                             "Abuse" = "#F8766D")) +
+            coord_flip() +
+  labs(y = "Number of directed tweets", x = "") +
+  ggtitle("Abuse by topic") +
+  theme(legend.position = "bottom",
+  #       axis.text.y = element_text(colour = colors),
+        plot.title = element_text(hjust = 0.5))
+```
+
