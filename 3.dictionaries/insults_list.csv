@@ -1,0 +1,810 @@
+Original_insults,regex,insult_name,regex2
+abortera,aborter[a-z]+,Abortera,\baborter[a-z]+\b
+absolutista,absolutist[a-z]+,Absolutista,\babsolutist[a-z]+\b
+agrogarcas,agrogarc[a-z]+,Agrogarca,\bagrogarc[a-z]+\b
+alacranes,alacran[a-z]*,Alacran,\balacran[a-z]*\b
+alcahueta,alcahuet[a-z]+,Alcahuetx,\balcahuet[a-z]+\b
+alcahuete,alcahuet[a-z]+,Alcahuetx,\balcahuet[a-z]+\b
+alcahuetes,alcahuet[a-z]+,Alcahuetx,\balcahuet[a-z]+\b
+acahuete,alcahuet[a-z]+,Alcahuetx,\balcahuet[a-z]+\b
+amoral,amoral,Amoral,\bamoral\b
+analfabetos,analfabet[a-z]+,Analfabetx,\banalfabet[a-z]+\b
+te vas a cagar,(va.*|anda.*) a cagar,Anda_a_cagar,\b(va.*|anda.*) a cagar\b
+anda a cagar,anda a * cagar,Anda_a_cagar,\banda a * cagar\b
+por que no te vas a la m,(vas|van|va) a la m,Anda_a_la_mierda,\b(vas|van|va) a la m\b
+ponete a laburar,(ponete|pongase|ponganse) a laburar,Anda_a_laburar,\b(ponete|pongase|ponganse) a laburar\b
+anda a laburar,anda a laburar,Anda_a_laburar,\banda a laburar\b
+garralapala,garralapala,Anda_a_laburar,\bgarralapala\b
+animal rastrero,animal[a-z]*,Animal,\banimal[a-z]*\b
+animales,animal[a-z]*,Animal,\banimal[a-z]*\b
+kakerto,kakert[a-z]+,Anti-k,\bkakert[a-z]+\b
+kakismo,kakismo[s]?,Anti-k,\bkakismo[s]?\b
+kernerismo,kerneris[a-z]+,Anti-k,\bkerneris[a-z]+\b
+kernerista,kerneris[a-z]+,Anti-k,\bkerneris[a-z]+\b
+kk,kk[s]?,Anti-k,\bkk[s]?\b
+kks,kk[s]?,Anti-k,\bkk[s]?\b
+kuk4r4cha,kuk[a-z0-9]+,Anti-k,\bkuk[a-z0-9]+\b
+kukas,kuk[a-z0-9]+,Anti-k,\bkuk[a-z0-9]+\b
+kumpas,kump[a-z]+,Anti-k,\bkump[a-z]+\b
+antiderechos,antiderechos,Antiderechos,\bantiderechos\b
+antirepublica,antirepublica,Antirepublica,\bantirepublica\b
+argolludas,argollud[a-z]+,Argolluda,\bargollud[a-z]+\b
+arpia,arpia[s]?,Arpia,\barpia[s]?\b
+arrastrado,arrastrad[a-z]+,Arrastradx,\barrastrad[a-z]+\b
+arrastrada,arrastrad[a-z]+,Arrastradx,\barrastrad[a-z]+\b
+asco,asco,Asco,\basco\b
+asco de ser humano,asco de ser humano,Asco,\basco de ser humano\b
+asco de tipo,asco de tip[a-z]+,Asco,\basco de tip[a-z]+\b
+asesina,asesin[a-z]+,Asesinx,\basesin[a-z]+\b
+asesines,asesin[a-z]+,Asesinx,\basesin[a-z]+\b
+asesino,asesin[a-z]+,Asesinx,\basesin[a-z]+\b
+asesinos,asesin[a-z]+,Asesinx,\basesin[a-z]+\b
+asquerosa,asqueros[a-z]*,Asquerosx,\basqueros[a-z]*\b
+asqueroso,asqueros[a-z]*,Asquerosx,\basqueros[a-z]*\b
+atorranta,atorrant[a-z]+,Atorrantx,\batorrant[a-z]+\b
+atorrante,atorrant[a-z]+,Atorrantx,\batorrant[a-z]+\b
+atorrantes,atorrant[a-z]+,Atorrantx,\batorrant[a-z]+\b
+atorrantitos,atorrant[a-z]+,Atorrantx,\batorrant[a-z]+\b
+atracadores,atracador[a-z]*,Atracadorx,\batracador[a-z]*\b
+aves carroñeras,ave[s]? carroñera[s]?,Ave_carroñera,\bave[s]? carroñera[s]?\b
+babosa,babos[a-z]+,Babosx,\bbabos[a-z]+\b
+bajate del pony,bajate del pony,Bajate_del_pony,\bbajate del pony\b
+baate,baate,Baate,\bbaate\b
+bandidos,bandid[a-z]+,Bandidx,\bbandid[a-z]+\b
+bastarda,bastard[a-z]+,Bastardx,\bbastard[a-z]+\b
+bastardo,bastard[a-z]+,Bastardx,\bbastard[a-z]+\b
+bastardos,bastard[a-z]+,Bastardx,\bbastard[a-z]+\b
+basura,basura[s]?,Basura,\bbasura[s]?\b
+basuras,basura[s]?,Basura,\bbasura[s]?\b
+basura humana,basura[s]? humana[?],Basura,\bbasura[s]? humana[?]\b
+basuras humanas,basura[s]? humana[?],Basura,\bbasura[s]? humana[?]\b
+son basura,so[n|s].*basu.*a,Basura,\bso[n|s].*basu.*a\b
+berreta,berreta[s]?,Berreta,\bberreta[s]?\b
+bicho,bich[a-z]+,Bichx,\bbich[a-z]+\b
+bichos,bich[a-z]+,Bichx,\bbich[a-z]+\b
+bipolar,bipolar[a-z]*,Bipolar,\bbipolar[a-z]*\b
+boba,bob[a-z]+,Bobx,\bbob[a-z]+\b
+bobo,bob[a-z]+,Bobx,\bbob[a-z]+\b
+bobos,bob[a-z]+,Bobx,\bbob[a-z]+\b
+inmunda bolsa de pus,inmund[a-z]+,Bolsa_de_pus,\binmund[a-z]+\b
+boluda,bolud[a-z]+,Boludx,\bbolud[a-z]+\b
+boludex,bolud[a-z]+,Boludx,\bbolud[a-z]+\b
+boludin,bolud[a-z]+,Boludx,\bbolud[a-z]+\b
+boludo,bolud[a-z]+,Boludx,\bbolud[a-z]+\b
+boludos,bolud[a-z]+,Boludx,\bbolud[a-z]+\b
+flor de boludo,bolud[a-z]+,Boludx,\bbolud[a-z]+\b
+globoluda,globol[a-z]+,Boludx_anti-M,\bglobol[a-z]+\b
+globoludos,globol[a-z]+,Boludx_anti-M,\bglobol[a-z]+\b
+bombazo,bombazo,Bombazo,\bbombazo\b
+borregos,borreg[a-z]+,Borregx,\bborreg[a-z]+\b
+bostas,bosta[s]?,Bosta,\bbosta[s]?\b
+bruta,brut[a-z]+,Brutx,\bbrut[a-z]+\b
+bruto,brut[a-z]+,Brutx,\bbrut[a-z]+\b
+buena para nada,buen[a-z]+ para nada,Buenx_para_nada,\bbuen[a-z]+ para nada\b
+burra,burr[a-z]+,Burrx,\bburr[a-z]+\b
+burro,burr[a-z]+,Burrx,\bburr[a-z]+\b
+burros,burr[a-z]+,Burrx,\bburr[a-z]+\b
+cabecita hueca,cabe[a-z]+[(de )]+[(hueca)|(termo)]+,Cabeza_hueca,\bcabe[a-z]+[(de )]+[(hueca)|(termo)]+\b
+cabeza de termo,cabe[a-z]+[(de )]+[(hueca)|(termo)]+,Cabeza_hueca,\bcabe[a-z]+[(de )]+[(hueca)|(termo)]+\b
+cabezas de termo,cabe[a-z]+[(de )]+[(hueca)|(termo)]+,Cabeza_hueca,\bcabe[a-z]+[(de )]+[(hueca)|(termo)]+\b
+cagadores,cagador[a-z]+,Cagadorx,\bcagador[a-z]+\b
+cagon,cagon[a-z]*,Cagonx,\bcagon[a-z]*\b
+callate,call[a-z]+( la)?( boca)?,Callate,\bcall[a-z]+( la)?( boca)?\b
+callese,call[a-z]+( la)?( boca)?,Callate,\bcall[a-z]+( la)?( boca)?\b
+callese la boca,call[a-z]+( la)?( boca)?,Callate,\bcall[a-z]+( la)?( boca)?\b
+canalla,canall[a-z]+,Canalla,\bcanall[a-z]+\b
+canallas,canall[a-z]+,Canalla,\bcanall[a-z]+\b
+sos el cancer del pais,so[n|s].*(cancer),Cancer,\bso[n|s].*(cancer)\b
+cancer a extirpar,cancer a extirpar,Cancer_a_extirpar,\bcancer a extirpar\b
+cancherita superada,cancherit[a-z]+ superad[a-z]+,Cancherx,\bcancherit[a-z]+ superad[a-z]+\b
+k-po,k-po,Capo,\bk-po\b
+caprichosa,caprichos[a-z]+,Caprichosx,\bcaprichos[a-z]+\b
+caprichosos,caprichos[a-z]+,Caprichosx,\bcaprichos[a-z]+\b
+cara de adoquin,cara[s]?[(de )]+[(adoquin)|(amianto)|(ogt)|(ojete)|(piedra)|(orto)|(titano)]+[s]?,Cara_de_*,\bcara[s]?[(de )]+[(adoquin)|(amianto)|(ogt)|(ojete)|(piedra)|(orto)|(titano)]+[s]?\b
+cara de amianto,cara[s]?[(de )]+[(adoquin)|(amianto)|(ogt)|(ojete)|(piedra)|(orto)|(titano)]+[s]?,Cara_de_*,\bcara[s]?[(de )]+[(adoquin)|(amianto)|(ogt)|(ojete)|(piedra)|(orto)|(titano)]+[s]?\b
+cara de ogt,cara[s]?[(de )]+[(adoquin)|(amianto)|(ogt)|(ojete)|(piedra)|(orto)|(titano)]+[s]?,Cara_de_*,\bcara[s]?[(de )]+[(adoquin)|(amianto)|(ogt)|(ojete)|(piedra)|(orto)|(titano)]+[s]?\b
+cara de piedra,cara[s]?[(de )]+[(adoquin)|(amianto)|(ogt)|(ojete)|(piedra)|(orto)|(titano)]+[s]?,Cara_de_*,\bcara[s]?[(de )]+[(adoquin)|(amianto)|(ogt)|(ojete)|(piedra)|(orto)|(titano)]+[s]?\b
+cara de piera,cara[s]?[(de )]+[(adoquin)|(amianto)|(ogt)|(ojete)|(piedra)|(orto)|(titano)]+[s]?,Cara_de_*,\bcara[s]?[(de )]+[(adoquin)|(amianto)|(ogt)|(ojete)|(piedra)|(orto)|(titano)]+[s]?\b
+cara de titanio sin moral,cara[s]?[(de )]+[(adoquin)|(amianto)|(ogt)|(ojete)|(piedra)|(orto)|(titano)]+[s]?,Cara_de_*,\bcara[s]?[(de )]+[(adoquin)|(amianto)|(ogt)|(ojete)|(piedra)|(orto)|(titano)]+[s]?\b
+cara piedra,cara[s]?[(de )]+[(adoquin)|(amianto)|(ogt)|(ojete)|(piedra)|(orto)|(titano)]+[s]?,Cara_de_*,\bcara[s]?[(de )]+[(adoquin)|(amianto)|(ogt)|(ojete)|(piedra)|(orto)|(titano)]+[s]?\b
+caras de piedra,cara[s]?[(de )]+[(adoquin)|(amianto)|(ogt)|(ojete)|(piedra)|(orto)|(titano)]+[s]?,Cara_de_*,\bcara[s]?[(de )]+[(adoquin)|(amianto)|(ogt)|(ojete)|(piedra)|(orto)|(titano)]+[s]?\b
+caracol,caracol,Caracol,\bcaracol\b
+cara dura,cara( )?dura(s)?,Caradura,\bcara( )?dura(s)?\b
+cara rota,cara( )?rota(s)?,Caradura,\bcara( )?rota(s)?\b
+cara rota de piedra,cara( )?rota(s)?,Caradura,\bcara( )?rota(s)?\b
+caradura,cara( )?dura(s)?,Caradura,\bcara( )?dura(s)?\b
+caraduras,cara( )?dura(s)?,Caradura,\bcara( )?dura(s)?\b
+cararrota,cararrota[s]?,Caradura,\bcararrota[s]?\b
+karadura,karadura,Caradura_anti-K,\bkaradura\b
+carroñas,carroña(s)?,Carroña,\bcarroña(s)?\b
+casta inmunda,casta .* inmunda,Casta_inmunda,\bcasta .* inmunda\b
+casta politica inmunda,casta .* inmunda,Casta_inmunda,\bcasta .* inmunda\b
+catador de waska,catador[a-z]* de waska,Catadorx_de_waska,\bcatador[a-z]* de waska\b
+cerda,cerd[a-z]+,Cerdx,\bcerd[a-z]+\b
+cerdas socialistas,cerd[a-z]+,Cerdx,\bcerd[a-z]+\b
+cerra el orto,cerra[a-z]+[(el )]+[(orto)|(ogt)|(pico)|(upite)]+,Cerra_el_orto,\bcerra[a-z]+[(el )]+[(orto)|(ogt)|(pico)|(upite)]+\b
+cerra el pico,cerra[a-z]+[(el )]+[(orto)|(ogt)|(pico)|(upite)]+,Cerra_el_orto,\bcerra[a-z]+[(el )]+[(orto)|(ogt)|(pico)|(upite)]+\b
+cerra el upite,cerra[a-z]+[(el )]+[(orto)|(ogt)|(pico)|(upite)]+,Cerra_el_orto,\bcerra[a-z]+[(el )]+[(orto)|(ogt)|(pico)|(upite)]+\b
+cerrando el orto,cerra[a-z]+[(el )]+[(orto)|(ogt)|(pico)|(upite)]+,Cerra_el_orto,\bcerra[a-z]+[(el )]+[(orto)|(ogt)|(pico)|(upite)]+\b
+cerra la boca,cerra[a-z]+[(la )]+[(boca)]+,Cerra_el_orto,\bcerra[a-z]+[(la )]+[(boca)]+\b
+cierre la boca,cierr[a-z]+[(el )]+[(orto)|(ogt)|(pico)|(upite)]+,Cerra_el_orto,\bcierr[a-z]+[(el )]+[(orto)|(ogt)|(pico)|(upite)]+\b
+cierren el orto,cierr[a-z]+[(el )]+[(orto)|(ogt)|(pico)|(upite)]+,Cerra_el_orto,\bcierr[a-z]+[(el )]+[(orto)|(ogt)|(pico)|(upite)]+\b
+chabacanos,chabacan[a-z]*,Chabacanx,\bchabacan[a-z]*\b
+deja de chamuyar,dej[a-z]+ de chamuyar,Chamuyo,\bdej[a-z]+ de chamuyar\b
+chanta,chanta[s]?,Chanta,\bchanta[s]?\b
+chantas,chanta[s]?,Chanta,\bchanta[s]?\b
+chanta de mierda,chanta[s]?[(de )]+[(mierda)]+,Chanta,\bchanta[s]?[(de )]+[(mierda)]+\b
+charlatan,charlatan[a-z]*,Charlatan,\bcharlatan[a-z]*\b
+charlatanes,charlatan[a-z]*,Charlatan,\bcharlatan[a-z]*\b
+cheta,chet[a-z]+,Chetx,\bchet[a-z]+\b
+cheto,chet[a-z]+,Chetx,\bchet[a-z]+\b
+chetos,chet[a-z]+,Chetx,\bchet[a-z]+\b
+sos un chiste,so[n|s].*(chiste),Chiste,\bso[n|s].*(chiste)\b
+choripanera,choripaner[a-z]+,Choripanerx,\bchoripaner[a-z]+\b
+choriplanera,choriplaner[a-z]+,Choripanerx,\bchoriplaner[a-z]+\b
+superchorros,.*chorr[aoe](s)?,Chorrx,\b.*chorr[aoe](s)?\b
+chorra,chorr[a-z]+,Chorrx,\bchorr[a-z]+\b
+chorres,chorr[a-z]+,Chorrx,\bchorr[a-z]+\b
+chorro,chorr[a-z]+,Chorrx,\bchorr[a-z]+\b
+chorros,chorr[a-z]+,Chorrx,\bchorr[a-z]+\b
+chorros de mierda,chorr[a-z]+[(de )]+[(mierda)]+,Chorrx,\bchorr[a-z]+[(de )]+[(mierda)]+\b
+le chupa 888 huevos,chupa.*huevo[s]?,Chupa_un_huevo,\bchupa.*huevo[s]?\b
+le chupa un huevo,chupa.*huevo[s]?,Chupa_un_huevo,\bchupa.*huevo[s]?\b
+chupa medias,chupa[a-z]*( (un|la|el))+( ?(media|pija|culo|huevo)(s)?)+,Chupamedias,\bchupa[a-z]*( (un|la|el))+( ?(media|pija|culo|huevo)(s)?)+\b
+chupamedia,chupa[a-z]*( (un|la|el))+( ?(media|pija|culo|huevo)(s)?)+,Chupamedias,\bchupa[a-z]*( (un|la|el))+( ?(media|pija|culo|huevo)(s)?)+\b
+se la chupan,se la chupa[sn]*,Chupar_la/el_*,\bse la chupa[sn]*\b
+me chupas la pija,chupa.*pija[s]?,Chupar_la/el_*,\bchupa.*pija[s]?\b
+chupaculo,chupa[a-z]*( (un|la|el))+( ?(media|pija|culo|huevo)(s)?)+,Chupar_la/el_*,\bchupa[a-z]*( (un|la|el))+( ?(media|pija|culo|huevo)(s)?)+\b
+chupala,chupa[a-z]*( (un|la|el))+( ?(media|pija|culo|huevo)(s)?)+,Chupar_la/el_*,\bchupa[a-z]*( (un|la|el))+( ?(media|pija|culo|huevo)(s)?)+\b
+chupame la pija,chupa[a-z]*( (un|la|el))+( ?(media|pija|culo|huevo)(s)?)+,Chupar_la/el_*,\bchupa[a-z]*( (un|la|el))+( ?(media|pija|culo|huevo)(s)?)+\b
+chupame un huevo,chupa[a-z]*( (un|la|el))+( ?(media|pija|culo|huevo)(s)?)+,Chupar_la/el_*,\bchupa[a-z]*( (un|la|el))+( ?(media|pija|culo|huevo)(s)?)+\b
+chupamela bien,chupa[a-z]*( (un|la|el))+( ?(media|pija|culo|huevo)(s)?)+,Chupar_la/el_*,\bchupa[a-z]*( (un|la|el))+( ?(media|pija|culo|huevo)(s)?)+\b
+ciega,cieg[a-z]+,Ciegx,\bcieg[a-z]+\b
+cinica,cinic[a-z]+,Cinicx,\bcinic[a-z]+\b
+cinico,cinic[a-z]+,Cinicx,\bcinic[a-z]+\b
+cinicos,cinic[a-z]+,Cinicx,\bcinic[a-z]+\b
+flor de cinica,cinic[a-z]+,Cinicx,\bcinic[a-z]+\b
+cipaya,cipay[a-z]+,Cipayx,\bcipay[a-z]+\b
+cipayo,cipay[a-z]+,Cipayx,\bcipay[a-z]+\b
+cipayos,cipay[a-z]+,Cipayx,\bcipay[a-z]+\b
+cobarde,cobarde[s]?,Cobarde,\bcobarde[s]?\b
+cobardes,cobarde[s]?,Cobarde,\bcobarde[s]?\b
+codiciosos,codicios[a-z]+,Codiciosx,\bcodicios[a-z]+\b
+te comas el verso,com[a-z] el verso,Comerse_el_verso,\bcom[a-z] el verso\b
+complice,complice[s]?,Complice,\bcomplice[s]?\b
+komplice,komplice[s]?,Complice_anti-K,\bkomplice[s]?\b
+komplices,komplice[s]?,Complice_anti-K,\bkomplice[s]?\b
+conchuda,conchud[a-z]+,Conchudx,\bconchud[a-z]+\b
+conchudas,conchud[a-z]+,Conchudx,\bconchud[a-z]+\b
+cornudo,cornud[a-z]+,Cornudx,\bcornud[a-z]+\b
+corrupta,corrupt[a-z]+( de)?( mierda)?,Corruptx,\bcorrupt[a-z]+( de)?( mierda)?\b
+corrupta de mierda,corrupt[a-z]+( de)?( mierda)?,Corruptx,\bcorrupt[a-z]+( de)?( mierda)?\b
+corruptas,corrupt[a-z]+( de)?( mierda)?,Corruptx,\bcorrupt[a-z]+( de)?( mierda)?\b
+corrupto,corrupt[a-z]+( de)?( mierda)?,Corruptx,\bcorrupt[a-z]+( de)?( mierda)?\b
+corruptos,corrupt[a-z]+( de)?( mierda)?,Corruptx,\bcorrupt[a-z]+( de)?( mierda)?\b
+korrupta,korrupt[a-z]+,Corruptx_anti-K,\bkorrupt[a-z]+\b
+korrupto,korrupt[a-z]+,Corruptx_anti-K,\bkorrupt[a-z]+\b
+korruptos,korrupt[a-z]+,Corruptx_anti-K,\bkorrupt[a-z]+\b
+crapulas,crapula[s]?,Crapula,\bcrapula[s]?\b
+kretina,kretin[a-z]+,Cretinx_anti-k,\bkretin[a-z]+\b
+kretinos,kretin[a-z]+,Cretinx_anti-k,\bkretin[a-z]+\b
+criminal,criminal[es]?,Criminal,\bcriminal[es]?\b
+criminales,criminal[es]?,Criminal,\bcriminal[es]?\b
+crueles,cruel[a-z]*,Cruel,\bcruel[a-z]*\b
+cucarachas,cucaracha[s]?,Cucaracha,\bcucaracha[s]?\b
+culo roto,culo (roto|sucio),Culo_roto,\bculo (roto|sucio)\b
+culo sucio,culo (roto|sucio),Culo_roto,\bculo (roto|sucio)\b
+das pena,(da[a-z]?)( (mucha|mas))? pena,Dar_pena,\b(da[a-z]?)( (mucha|mas))? pena\b
+dan repulsion,(da[a-z]?)( (mucha|mas))? repulsion,Dar_repulsion,\b(da[a-z]?)( (mucha|mas))? repulsion\b
+da verguenza,(da[a-z]?)( (mucha|mas))? verguenza,Dar_verguenza,\b(da[a-z]?)( (mucha|mas))? verguenza\b
+da vergenza,(da[a-z]?)( (mucha|mas))? verguenza,Dar_verguenza,\b(da[a-z]?)( (mucha|mas))? verguenza\b
+dan verguenza,(da[a-z]?)( (mucha|mas))? verguenza,Dar_verguenza,\b(da[a-z]?)( (mucha|mas))? verguenza\b
+dan vergenza,(da[a-z]?)( (mucha|mas))? verguenza,Dar_verguenza,\b(da[a-z]?)( (mucha|mas))? verguenza\b
+dan verguenza ajena,(da[a-z]?)( (mucha|mas))? verguenza,Dar_verguenza,\b(da[a-z]?)( (mucha|mas))? verguenza\b
+dan vergenza ajena,(da[a-z]?)( (mucha|mas))? verguenza,Dar_verguenza,\b(da[a-z]?)( (mucha|mas))? verguenza\b
+das verguenza,(da[a-z]?)( (mucha|mas))? verguenza,Dar_verguenza,\b(da[a-z]?)( (mucha|mas))? verguenza\b
+das vergenza,(da[a-z]?)( (mucha|mas))? verguenza,Dar_verguenza,\b(da[a-z]?)( (mucha|mas))? verguenza\b
+vergonzoso,(da|so|es).*(verguenza|vergonzos[a-z]+),Dar_verguenza,\b(da|so|es).*(verguenza|vergonzos[a-z]+)\b
+verguenza ajena,(da|so|es).*(verguenza|vergonzos[a-z]+),Dar_verguenza,\b(da|so|es).*(verguenza|vergonzos[a-z]+)\b
+vergenza ajena,(da|so|es).*(verguenza|vergonzos[a-z]+),Dar_verguenza,\b(da|so|es).*(verguenza|vergonzos[a-z]+)\b
+verguenza nacional,(da|so|es).*(verguenza|vergonzos[a-z]+),Dar_verguenza,\b(da|so|es).*(verguenza|vergonzos[a-z]+)\b
+me dan verguenza,da[ns]* verguenza,Dar_verguenza,\bda[ns]* verguenza\b
+me das vergenza,da[ns]* verguenza,Dar_verguenza,\bda[ns]* verguenza\b
+da asco,(da[a-z]?)( (mucho|mas))? asco,Das_asco,\b(da[a-z]?)( (mucho|mas))? asco\b
+da mucho asco,(da[a-z]?)( (mucho|mas))? asco,Das_asco,\b(da[a-z]?)( (mucho|mas))? asco\b
+dan asco,(da[a-z]?)( (mucho|mas))? asco,Das_asco,\b(da[a-z]?)( (mucho|mas))? asco\b
+dan mas asco,(da[a-z]?)( (mucho|mas))? asco,Das_asco,\b(da[a-z]?)( (mucho|mas))? asco\b
+das asco,(da[a-z]?)( (mucho|mas))? asco,Das_asco,\b(da[a-z]?)( (mucho|mas))? asco\b
+asco das,asco [(me)|(nos)|(le)|(te)|(les)]* da[sn]*,Das_asco,\basco [(me)|(nos)|(le)|(te)|(les)]* da[sn]*\b
+asco me dan,asco [(me)|(nos)|(le)|(te)|(les)]* da[sn]*,Das_asco,\basco [(me)|(nos)|(le)|(te)|(les)]* da[sn]*\b
+me dan asco,da[ns]* asco,Das_asco,\bda[ns]* asco\b
+me das asco,da[ns]* asco,Das_asco,\bda[ns]* asco\b
+son de cuarta,so[n|s].*(cuarta|4ta),De_cuarta,\bso[n|s].*(cuarta|4ta)\b
+sos de cuarta,so[n|s].*(cuarta|4ta),De_cuarta,\bso[n|s].*(cuarta|4ta)\b
+dejate de joder,dej[a-z]+ de joder,Deja_de_joder,\bdej[a-z]+ de joder\b
+dejense de joder,dej[a-z]+ de joder,Deja_de_joder,\bdej[a-z]+ de joder\b
+deja de mentir,dej[a-z]+ de mentir,Deja_de_mentir,\bdej[a-z]+ de mentir\b
+deja de vender humo,dej[a-z]+ de vender humo,Deja_de_mentir,\bdej[a-z]+ de vender humo\b
+delincuenta,delincuent[a-z]+,Delincuentx,\bdelincuent[a-z]+\b
+delincuente,delincuent[a-z]+,Delincuentx,\bdelincuent[a-z]+\b
+delincuentes,delincuent[a-z]+,Delincuentx,\bdelincuent[a-z]+\b
+delinkuente,delinkuent[a-z]+,Delincuentx_anti-K,\bdelinkuent[a-z]+\b
+delirante,delirante[s]?,Delirante,\bdelirante[s]?\b
+demagogo,demagog[a-z]+,Demagogx,\bdemagog[a-z]+\b
+demente,demente,Demente,\bdemente\b
+denunciadora serial,denunciador[a-z] serial[es]?,Denunciadorx,\bdenunciador[a-z] serial[es]?\b
+desagradable,(so[sn]|es).*desagradable(s)?,Desagradable,\b(so[sn]|es).*desagradable(s)?\b
+desagradale,(so[sn]|es).*desagradable(s)?,Desagradable,\b(so[sn]|es).*desagradable(s)?\b
+descarados,descarad[a-z]+,Descaradx,\bdescarad[a-z]+\b
+descerebrados,descerebrad[a-z]+,Descerebradx,\bdescerebrad[a-z]+\b
+descerebrada,descerebrad[a-z]+,Descerebradx,\bdescerebrad[a-z]+\b
+descerebrada neuronal,descerebrad[a-z]+,Descerebradx,\bdescerebrad[a-z]+\b
+descerebrado,descerebrad[a-z]+,Descerebradx,\bdescerebrad[a-z]+\b
+descerebrados,descerebrad[a-z]+,Descerebradx,\bdescerebrad[a-z]+\b
+desestabilizador,desestabilizador[a-z]*,Desestabilizadorx,\bdesestabilizador[a-z]*\b
+degenerados,degenerad[a-z]+,Desgeneradx,\bdegenerad[a-z]+\b
+desgraciados,desgraciad[a-z]+,Desgraciadx,\bdesgraciad[a-z]+\b
+despojo humano,despojo humano,Despojo_humano,\bdespojo humano\b
+despreciable,(so[sn]|es).*despreciable(s)?,Despreciable,\b(so[sn]|es).*despreciable(s)?\b
+ser despreciable,ser(es)? (despreciable|inmundo|siniestro|horrible)(s)?,Despreciable,\bser(es)? (despreciable|inmundo|siniestro|horrible)(s)?\b
+desprestigiado,(so[sn]|es).*desprestigiad[a-z]+,Desprestigiadx,\b(so[sn]|es).*desprestigiad[a-z]+\b
+desquiciada,desquiciad[a-z]+,Desquiciadx,\bdesquiciad[a-z]+\b
+desquiciado,desquiciad[a-z]+,Desquiciadx,\bdesquiciad[a-z]+\b
+destructores,destructor[a-z]+,Destructorx,\bdestructor[a-z]+\b
+destructores sociales,destructor[a-z]+,Destructorx,\bdestructor[a-z]+\b
+desvergonzado,desvergonzad[a-z]+,Desvergonzadx,\bdesvergonzad[a-z]+\b
+desvergonzados,desvergonzad[a-z]+,Desvergonzadx,\bdesvergonzad[a-z]+\b
+detestable,detestable[s]?,Detestable,\bdetestable[s]?\b
+detestables,detestable[s]?,Detestable,\bdetestable[s]?\b
+difamadora,difamador[a-z]*,Difamadorx,\bdifamador[a-z]*\b
+dipuchorros,dipuchorr[a-z]+,Dipuchorrx,\bdipuchorr[a-z]+\b
+diputrucho,diputruch[a-z]+,Diputruchx,\bdiputruch[a-z]+\b
+dogmaticos,dogmatic[a-z]+,Dogmaticx,\bdogmatic[a-z]+\b
+dolobus,dolobu[s]?,Dolobu,\bdolobu[s]?\b
+drogadicta,(so[sn]|es).*drogadict[a-z]+,Drogadictx,\b(so[sn]|es).*drogadict[a-z]+\b
+te duela el ort,duel[ae] el (ort|orto|ogt|ojete|culo),Duele_el_orto,\bduel[ae] el (ort|orto|ogt|ojete|culo)\b
+egoista de mierda,egoista[s]?( de)?( mierda)?,Egoista,\begoista[s]?( de)?( mierda)?\b
+empobrecedores,empobrecedor[a-z]+,Empobrecedorx,\bempobrecedor[a-z]+\b
+zurda empobrecedora,empobrecedor[a-z]+,Empobrecedorx,\bempobrecedor[a-z]+\b
+enano,enan[a-z]+,Enanx,\benan[a-z]+\b
+enano maldito,enan[a-z]+,Enanx,\benan[a-z]+\b
+energumeno,energumen[a-z]+,Energumenx,\benergumen[a-z]+\b
+enfermantes,enfermante[s]?,Enfermante,\benfermante[s]?\b
+enferma,(so[sn]|es).*enferm[a-z]+,Enfermx,\b(so[sn]|es).*enferm[a-z]+\b
+enferma mental,(so[sn]|es).*enferm[a-z]+,Enfermx,\b(so[sn]|es).*enferm[a-z]+\b
+enjendro,enjendr[a-z]+,Enjendro,\benjendr[a-z]+\b
+entregaste el culo,entreg[a-z]+( el)+( (culo|orto|ogt))+,Entregar_el_culo,\bentreg[a-z]+( el)+( (culo|orto|ogt))+\b
+envidiosa,envidios[a-z]+,Envidiosx,\benvidios[a-z]+\b
+escoria,escoria[s]?,Escoria,\bescoria[s]?\b
+escroto,(so[sn]|es).*escroto,Escroto,\b(so[sn]|es).*escroto\b
+espuria,espuria[s]?,Espuria,\bespuria[s]?\b
+estafadores,estafador[a-z]*,Estafadorx,\bestafador[a-z]*\b
+q al pedo estas,al pedo esta[sn]?,Estar_al_pedo,\bal pedo esta[sn]?\b
+estupida,estupid[a-z]+,Estupidx,\bestupid[a-z]+\b
+estupido,estupid[a-z]+,Estupidx,\bestupid[a-z]+\b
+estupidos,estupid[a-z]+,Estupidx,\bestupid[a-z]+\b
+estupidxs,estupid[a-z]+,Estupidx,\bestupid[a-z]+\b
+eunucos,eunuc[a-z]+,Eunucx,\beunuc[a-z]+\b
+evasora,evasor[a-z]*,Evasorx,\bevasor[a-z]*\b
+evasores,evasor[a-z]*,Evasorx,\bevasor[a-z]*\b
+extorsionador,extorsionador[a-z]*,Extorsionadorx,\bextorsionador[a-z]*\b
+facho,fach[a-z]+,Fachx,\bfach[a-z]+\b
+fachos,fach[a-z]+,Fachx,\bfach[a-z]+\b
+falsos,(so[sn]|es).*fals[a-z]+,Falsx,\b(so[sn]|es).*fals[a-z]+\b
+fanatica,fanatic[a-z]+,Fanaticx,\bfanatic[a-z]+\b
+fanaticos,fanatic[a-z]+,Fanaticx,\bfanatic[a-z]+\b
+fascista,fascista[s]?,Fascistx,\bfascista[s]?\b
+fascistas de cuarta,fascista[s]?,Fascistx,\bfascista[s]?\b
+femibolche,femibolche[s]?,Feminazi_+,\bfemibolche[s]?\b
+femidiotas,femidiota[s]?,Feminazi_+,\bfemidiota[s]?\b
+femimbeciles,femimbecil[es]?,Feminazi_+,\bfemimbecil[es]?\b
+feminazi,feminazi[s]?,Feminazi_+,\bfeminazi[s]?\b
+feminazis,feminazi[s]?,Feminazi_+,\bfeminazi[s]?\b
+sos fea,so[n|s].*(fea),Fex,\bso[n|s].*(fea)\b
+figureti,figuret[t]?i[s]?,Figureti,\bfiguret[t]?i[s]?\b
+focas aplaudidoras,foca[s]? aplaudidora[s]?,Foca_aplaudidora,\bfoca[s]? aplaudidora[s]?\b
+forra,forr[a-z]+,Forrx,\bforr[a-z]+\b
+forro,forr[a-z]+,Forrx,\bforr[a-z]+\b
+forros,forr[a-z]+,Forrx,\bforr[a-z]+\b
+pedazo de forro,forr[a-z]+,Forrx,\bforr[a-z]+\b
+fracasado,fracas[a-z]+,Fracasadx,\bfracas[a-z]+\b
+frakaso,frakas[a-z]+,Fracaso_anti-K,\bfrakas[a-z]+\b
+frustrados,(so[sn]|es).*frustrad[a-z]+,Frustradx,\b(so[sn]|es).*frustrad[a-z]+\b
+gaga,gaga[s]?,Gaga,\bgaga[s]?\b
+gallinas a sueldo,gallina[s],Gallina_a_sueldo,\bgallina[s]\b
+ganso,gans[a-z]+,Gansx,\bgans[a-z]+\b
+garca,garca[s]?,Garcx,\bgarca[s]?\b
+garcas,garca[s]?,Garcx,\bgarca[s]?\b
+garkas,garka[s]?,Garcx_anti-K,\bgarka[s]?\b
+garrapata,garrapata[s]?,Garrapata,\bgarrapata[s]?\b
+gato,gat[a-z]+,Gatx,\bgat[a-z]+\b
+gato contrabandista,gat[a-z]+,Gatx,\bgat[a-z]+\b
+toga,toga(s)?,Gatx,\btoga(s)?\b
+gil,gil[a-z]*,Gilx,\bgil[a-z]*\b
+giles,gil[a-z]*,Gilx,\bgil[a-z]*\b
+globerto,globert[a-z]+,Globertx,\bglobert[a-z]+\b
+globertos,globert[a-z]+,Globertx,\bglobert[a-z]+\b
+globolin,globol[a-z]+,Globertx,\bglobol[a-z]+\b
+golpista,golpista[s]?,Golpista,\bgolpista[s]?\b
+golpistas,golpista[s]?,Golpista,\bgolpista[s]?\b
+gomas,goma[s]?,Goma,\bgoma[s]?\b
+gorda,gord[a-z]+,Gordx,\bgord[a-z]+\b
+gordita,gord[a-z]+,Gordx,\bgord[a-z]+\b
+gordito,gord[a-z]+,Gordx,\bgord[a-z]+\b
+gordo,gord[a-z]+,Gordx,\bgord[a-z]+\b
+gordo,gord[a-z]+,Gordx,\bgord[a-z]+\b
+gordo,gord[a-z]+,Gordx,\bgord[a-z]+\b
+gorila,gorila[s]?,Gorila,\bgorila[s]?\b
+gorilas,gorila[s]?,Gorila,\bgorila[s]?\b
+grasa,grasa,Grasa,\bgrasa\b
+gusano,gusano[s]?,Gusano,\bgusano[s]?\b
+gusanos,gusano[s]?,Gusano,\bgusano[s]?\b
+hizo la colita,(hace(s)?|hizo|hicieron).*(cola|colita|ogt|orto),Hacer_el_culo,\b(hace(s)?|hizo|hicieron).*(cola|colita|ogt|orto)\b
+hacete culear,(hacete|haganse) (culear|coger|cojer),Hacete_coger,\b(hacete|haganse) (culear|coger|cojer)\b
+hacete humo,(hacete|haganse) humo,Hacete_humo,\b(hacete|haganse) humo\b
+hambriador,hambriador[a-z]*,Hambriadorx,\bhambriador[a-z]*\b
+h dep,h dep,HDP,\bh dep\b
+hdmp,hd[a-z0-9]*p[s]?,HDP,\bhd[a-z0-9]*p[s]?\b
+hdp,hd[a-z0-9]*p[s]?,HDP,\bhd[a-z0-9]*p[s]?\b
+hdre1000p,hd[a-z0-9]*p[s]?,HDP,\bhd[a-z0-9]*p[s]?\b
+hdremilp,hd[a-z0-9]*p[s]?,HDP,\bhd[a-z0-9]*p[s]?\b
+hdrmp,hd[a-z0-9]*p[s]?,HDP,\bhd[a-z0-9]*p[s]?\b
+hdrp,hd[a-z0-9]*p[s]?,HDP,\bhd[a-z0-9]*p[s]?\b
+hdrps,hd[a-z0-9]*p[s]?,HDP,\bhd[a-z0-9]*p[s]?\b
+hderemilput,hd[a-z0-9]*put[a-z]*,HDP,\bhd[a-z0-9]*put[a-z]*\b
+manga de hdp,hdp,HDP,\bhdp\b
+mangas de hdp,hdp,HDP,\bhdp\b
+hijo de mil p.,hij.*p,HDP,\bhij.*p\b
+hijosdep.ta,hij.*p\.ta[s]?,HDP,\bhij.*p\.ta[s]?\b
+hijodemilput,hij.*put,HDP,\bhij.*put\b
+hija de mil puta,hij.*puta[s]?,HDP,\bhij.*puta[s]?\b
+hija de puta,hij.*puta[s]?,HDP,\bhij.*puta[s]?\b
+hija de remil puta,hij.*puta[s]?,HDP,\bhij.*puta[s]?\b
+hija de un camion con acopaldos de putas,hij.*puta[s]?,HDP,\bhij.*puta[s]?\b
+hijas de puta,hij.*puta[s]?,HDP,\bhij.*puta[s]?\b
+hijo de mil putas,hij.*puta[s]?,HDP,\bhij.*puta[s]?\b
+hijo de puta,hij.*puta[s]?,HDP,\bhij.*puta[s]?\b
+hijo de re mil putas,hij.*puta[s]?,HDP,\bhij.*puta[s]?\b
+hijo de remil puta,hij.*puta[s]?,HDP,\bhij.*puta[s]?\b
+hijo de su puta madre,hij.*puta[s]?,HDP,\bhij.*puta[s]?\b
+hijo de una p--uta barata,hij.*puta[s]?,HDP,\bhij.*puta[s]?\b
+hijoeputas,hij.*puta[s]?,HDP,\bhij.*puta[s]?\b
+hijos d puta,hij.*puta[s]?,HDP,\bhij.*puta[s]?\b
+hijos de puta,hij.*puta[s]?,HDP,\bhij.*puta[s]?\b
+hijos de putas,hij.*puta[s]?,HDP,\bhij.*puta[s]?\b
+hijos de remil putas,hij.*puta[s]?,HDP,\bhij.*puta[s]?\b
+hijosdeputa,hij.*puta[s]?,HDP,\bhij.*puta[s]?\b
+remil hijo de reverendisimas mierdas,hij[a-z]+ de .* mierda[s]?,HDP,\bhij[a-z]+ de .* mierda[s]?\b
+hmp,hmp,HDP,\bhmp\b
+hp,hp,HDP,\bhp\b
+ijo e puta,ijo e puta[s],HDP,\bijo e puta[s]\b
+hiena,hiena[s]?,Hiena,\bhiena[s]?\b
+hienas,hiena[s]?,Hiena,\bhiena[s]?\b
+hipocrita,hipocrita[s]?,Hipocrita,\bhipocrita[s]?\b
+hipocrita ,hipocrita[s]?,Hipocrita,\bhipocrita[s]?\b
+hipocritas,hipocrita[s]?,Hipocrita,\bhipocrita[s]?\b
+pedazo de hipocrita,hipocrita[s]?,Hipocrita,\bhipocrita[s]?\b
+hipokrita,hipokrita[s]?,Hipocrita_anti-K,\bhipokrita[s]?\b
+horrendo,(so[sn]|es).*horrend[a-z]+,Horrendx,\b(so[sn]|es).*horrend[a-z]+\b
+persona horrible,persona[s]? horrible[s]?,Horrible,\bpersona[s]? horrible[s]?\b
+señor horrible,señor(a)? Horrible,Horrible,\bseñor(a)? Horrible\b
+mujer horrible,(mujer|hombre) horrible,Horrible,\b(mujer|hombre) horrible\b
+hueca,huec[a-z]+,Huecx,\bhuec[a-z]+\b
+huevon,huevon[a-z]*,Huevonx,\bhuevon[a-z]*\b
+capo de las estepas de la idiotez,capo de las estepas de la idiotez,Idiota,\bcapo de las estepas de la idiotez\b
+idiota,idiot[a-z]*,Idiota,\bidiot[a-z]*\b
+idiotas,idiot[a-z]*,Idiota,\bidiot[a-z]*\b
+idiote,idiot[a-z]*,Idiota,\bidiot[a-z]*\b
+ignorante,ignorante[s]?,Ignorante,\bignorante[s]?\b
+ignorantes,ignorante[s]?,Ignorante,\bignorante[s]?\b
+iletrada,iletrad[a-z]+,Iletradx,\biletrad[a-z]+\b
+iluso,ilus[a-z]+,Ilusx,\bilus[a-z]+\b
+ilusos,ilus[a-z]+,Ilusx,\bilus[a-z]+\b
+imbecil,imbecil[a-z]*,Imbecil,\bimbecil[a-z]*\b
+imbecil,imbecil[a-z]*,Imbecil,\bimbecil[a-z]*\b
+imberbes,imberbe[s]?,Imberbe,\bimberbe[s]?\b
+impresentable,impresentable[s]?,Impresentable,\bimpresentable[s]?\b
+impresentables,impresentable[s]?,Impresentable,\bimpresentable[s]?\b
+inadaptadas,inadaptad[a-z]+,Inadaptadx,\binadaptad[a-z]+\b
+incapaz,incapa[zces],Incapaz,\bincapa[zces]\b
+incoherente,incoherente[s]?,Incoherente,\bincoherente[s]?\b
+incompetentes,incompetente[s]?,Incompetente,\bincompetente[s]?\b
+indignante,indign[a-z]+,Indignante,\bindign[a-z]+\b
+indigna,indign[a-z]+,Indignx,\bindign[a-z]+\b
+indigno,indign[a-z]+,Indignx,\bindign[a-z]+\b
+indignos,indign[a-z]+,Indignx,\bindign[a-z]+\b
+ineptas,inept[a-z]+,Ineptx,\binept[a-z]+\b
+inepto,inept[a-z]+,Ineptx,\binept[a-z]+\b
+ineptos,inept[a-z]+,Ineptx,\binept[a-z]+\b
+manga de ineptos,inept[a-z]+,Ineptx,\binept[a-z]+\b
+inescrupulosa,inescrupulos[a-z]+,Inescrupulosx,\binescrupulos[a-z]+\b
+infame,infame[s]?,Infame,\binfame[s]?\b
+infeliz,infeli[zces],Infeliz,\binfeli[zces]\b
+infeliz de mierda,infeli[zces],Infeliz,\binfeli[zces]\b
+infradotada,infradotad[a-z]+,Infradotadx,\binfradotad[a-z]+\b
+inhumana,inhuman[a-z]+,Inhumanx,\binhuman[a-z]+\b
+inhumanos,inhuman[a-z]+,Inhumanx,\binhuman[a-z]+\b
+inmoral,inmoral[es]?,Inmoral,\binmoral[es]?\b
+inmorales,inmoral[es]?,Inmoral,\binmoral[es]?\b
+inmundo,inmund[a-z]+,Inmundx,\binmund[a-z]+\b
+inmunda,inmund[a-z]+,Inmundx,\binmund[a-z]+\b
+ser inmundo,ser(es)? (despreciable|inmundo|siniestro|horrible)(s)?,Inmundx,\bser(es)? (despreciable|inmundo|siniestro|horrible)(s)?\b
+inoperante,inoperante[s]?,Inoperante,\binoperante[s]?\b
+inoperantes,inoperante[s]?,Inoperante,\binoperante[s]?\b
+insano,insan[a-z]+,Insanx,\binsan[a-z]+\b
+insensible,insensible[s]?,Insensible,\binsensible[s]?\b
+insensibles,insensible[s]?,Insensible,\binsensible[s]?\b
+inservible,inservible[s]?,Inservible,\binservible[s]?\b
+inservibles,inservible[s]?,Inservible,\binservible[s]?\b
+insoportable,insoportable[s]?,Insoportable,\binsoportable[s]?\b
+intolerante,intolerante[s]?,Intolerante,\bintolerante[s]?\b
+inutil,inutil[es]?,Inutil,\binutil[es]?\b
+inutiles,inutil[es]?,Inutil,\binutil[es]?\b
+inutiles de mierda,inutil[es]?,Inutil,\binutil[es]?\b
+manga de inutiles,inutil[es]?,Inutil,\binutil[es]?\b
+invalidos,invalid[a-z]+,Invalidx,\binvalid[a-z]+\b
+irrespetuoso,irrespetuos[a-z]+,Irrespetuosx,\birrespetuos[a-z]+\b
+irresponsables,irresposable[s]?,Irresponsable,\birresposable[s]?\b
+jdt,jdt,Jodete,\bjdt\b
+jo dan se,jo (dan|de) se,Jodete,\bjo (dan|de) se\b
+jodanse,jodanse,Jodete,\bjodanse\b
+jodete,jodete,Jodete,\bjodete\b
+kicifault,kicifault,Kicifault,\bkicifault\b
+lacra,lacra[s]?,Lacra,\blacra[s]?\b
+lacras,lacra[s]?,Lacra,\blacra[s]?\b
+lakra,lakra[s]?,Lacra_anti-K,\blakra[s]?\b
+lakras,lakra[s]?,Lacra_anti-K,\blakra[s]?\b
+ladri,ladri[s]?,Ladri,\bladri[s]?\b
+ladris,ladri[s]?,Ladri,\bladri[s]?\b
+ladron,ladron[a-z]*,Ladronx,\bladron[a-z]*\b
+ladrona,ladron[a-z]*,Ladronx,\bladron[a-z]*\b
+ladronas,ladron[a-z]*,Ladronx,\bladron[a-z]*\b
+ladrones,ladron[a-z]*,Ladronx,\bladron[a-z]*\b
+lambeculos,lambeculos,Lameculos,\blambeculos\b
+lame kageta,lame( )?(culo|kageta|cajeta|orto)[s]?,Lameculos,\blame( )?(culo|kageta|cajeta|orto)[s]?\b
+lamebotas,lame( )?(culo|kageta|cajeta|orto)[s]?,Lameculos,\blame( )?(culo|kageta|cajeta|orto)[s]?\b
+lameculo,lame( )?(culo|kageta|cajeta|orto)[s]?,Lameculos,\blame( )?(culo|kageta|cajeta|orto)[s]?\b
+sos lo mas lamentable,so[n|s].*(lamentable),Lamentable,\bso[n|s].*(lamentable)\b
+pedazo de langosta,pedazo de (langosta|mierda)[s]?,Langosta,\bpedazo de (langosta|mierda)[s]?\b
+larga la falopa,larga la (falopa|merca|droga),Larga_la_falopa,\blarga la (falopa|merca|droga)\b
+larrata,larrata,Larrata,\blarrata\b
+larva inmunda,larva[s]?,Larva,\blarva[s]?\b
+lavador,lavador[a-z]*,Lavadorx,\blavador[a-z]*\b
+anda a lavarte el orto,anda a lavarte el orto,Lavate_el_orto,\banda a lavarte el orto\b
+lavarte la boca,lavar.*boca,Lavate_la_boca,\blavar.*boca\b
+la concha de tu madre,(re)?concha.*madre,Lcdtm,\b(re)?concha.*madre\b
+la re concha de tu madre,(re)?concha.*madre,Lcdtm,\b(re)?concha.*madre\b
+la reconcha puta de tu madre,(re)?concha.*madre,Lcdtm,\b(re)?concha.*madre\b
+andate a la concha de tu madre,andate .* concha .* madre,Lcdtm,\bandate .* concha .* madre\b
+lela,lel[aoes]*,Lelx,\blel[aoes]*\b
+lelo,lel[aoes]*,Lelx,\blel[aoes]*\b
+lloron,lloron[a-z]*,Lloronx,\blloron[a-z]*\b
+llorones,lloron[a-z]*,Lloronx,\blloron[a-z]*\b
+loca,loc[a-z]+,Locx,\bloc[a-z]+\b
+loca como una cabra,loc[a-z]+,Locx,\bloc[a-z]+\b
+loca de mierda,loc[a-z]+,Locx,\bloc[a-z]+\b
+loco,loc[a-z]+,Locx,\bloc[a-z]+\b
+loko,lok[a-z]+,Locx_anti-K,\blok[a-z]+\b
+loros barranqueros,lor[aoes]*,Lorx,\blor[aoes]*\b
+lpm,lpm,Lpm,\blpm\b
+la puta madre que te pario,(re)?puta.*pario,Lpqtp,\b(re)?puta.*pario\b
+andate a la reputisima madre que te pario,andate .* madre .* pario,Lpqtp,\bandate .* madre .* pario\b
+andate a la puta que te pario,andate .* puta .* pario,Lpqtp,\bandate .* puta .* pario\b
+lpqtp,lpqt[rm]*p,lpqtp,\blpqt[rm]*p\b
+la pqtp,pqt[rm]*p,Lpqtp,\bpqt[rm]*p\b
+la pu ta que te pa rio,pu ta.*pa rio,Lpqtp,\bpu ta.*pa rio\b
+vayanse a la puta que los pario,put.*pario,Lpqtp,\bput.*pario\b
+la tenes adentro,la (tenes|tiene[n]?) adentro,LTA,\bla (tenes|tiene[n]?) adentro\b
+la tienen adentro,la (tenes|tiene[n]?) adentro,LTA,\bla (tenes|tiene[n]?) adentro\b
+lta,lta,LTA,\blta\b
+machirulo,machirulo[s]?,Machirulo,\bmachirulo[s]?\b
+mafiosa,mafios[a-z]+,Mafiosx,\bmafios[a-z]+\b
+mafioso,mafios[a-z]+,Mafiosx,\bmafios[a-z]+\b
+mafiosos,mafios[a-z]+,Mafiosx,\bmafios[a-z]+\b
+mal cagado,mal cagad[a-z]+,Mal_cagadx,\bmal cagad[a-z]+\b
+mal nacidos,mal nacid[a-z]+,Mal_nacidx,\bmal nacid[a-z]+\b
+mal parido,mal parid[a-z]+,Mal_nacidx,\bmal parid[a-z]+\b
+mala leche,mala leche,Mala_leche,\bmala leche\b
+malandra,malandr[a-z]+,Malandrx,\bmalandr[a-z]+\b
+malandras,malandr[a-z]+,Malandrx,\bmalandr[a-z]+\b
+mal educado,mal educad[a-z]+,Maleducadx,\bmal educad[a-z]+\b
+malcriados,malcriad[a-z]+,Maleducadx,\bmalcriad[a-z]+\b
+maleducada,maleducad[a-z]+,Maleducadx,\bmaleducad[a-z]+\b
+maleducado,maleducad[a-z]+,Maleducadx,\bmaleducad[a-z]+\b
+maloliente,maloliente[s]?,Maloliente,\bmaloliente[s]?\b
+mamarracha,mamarrach[a-z]+,Mamarrachx,\bmamarrach[a-z]+\b
+mamarracho,mamarrach[a-z]+,Mamarrachx,\bmamarrach[a-z]+\b
+mamarrachos,mamarrach[a-z]+,Mamarrachx,\bmamarrach[a-z]+\b
+mamerta,mamert[a-z]+,Mamertx,\bmamert[a-z]+\b
+mamerto,mamert[a-z]+,Mamertx,\bmamert[a-z]+\b
+mamotreto,mamotret[a-z]+,Mamotretx,\bmamotret[a-z]+\b
+manipuladores,manipulador[a-z]*,Manipuladorx,\bmanipulador[a-z]*\b
+sarta de mantenidos,sarta de mantenid[aoe]s,Mantenidx,\bsarta de mantenid[aoe]s\b
+deja de mariconear,dej[a-z]+ de mariconear,Mariconear,\bdej[a-z]+ de mariconear\b
+flor de maraca,maraca[s]?,Mariconx,\bmaraca[s]?\b
+maraca,maraca[s]?,Mariconx,\bmaraca[s]?\b
+marica,maric[a-z]+,Mariconx,\bmaric[a-z]+\b
+maricon,maric[a-z]+,Mariconx,\bmaric[a-z]+\b
+marmota,marmota[s]?,Marmota,\bmarmota[s]?\b
+marmota atomico,marmota[s]?,Marmota,\bmarmota[s]?\b
+matate,matate,Matate,\bmatate\b
+me cago en vos,cago en (vos|ustedes|usted|todos|el|ella),Me_cago_en,\bcago en (vos|ustedes|usted|todos|el|ella)\b
+se esta cagando en,esta[sn]?.*cagando en,Me_cago_en,\besta[sn]?.*cagando en\b
+mediocre,mediocre[s]?,Mediocre,\bmediocre[s]?\b
+mediocres,mediocre[s]?,Mediocre,\bmediocre[s]?\b
+mente corta,mente corta,Mente_corta,\bmente corta\b
+mentirosa,mentiros[a-z]+,Mentirosx,\bmentiros[a-z]+\b
+mentirosas seriales,mentiros[a-z]+,Mentirosx,\bmentiros[a-z]+\b
+mentiroso,mentiros[a-z]+,Mentirosx,\bmentiros[a-z]+\b
+mentiroso serial,mentiros[a-z]+,Mentirosx,\bmentiros[a-z]+\b
+mentirosos,mentiros[a-z]+,Mentirosx,\bmentiros[a-z]+\b
+pedazo de mentirosa,mentiros[a-z]+,Mentirosx,\bmentiros[a-z]+\b
+mentiroso,mentiros[a-z]+,Mentirosx,\bmentiros[a-z]+\b
+mercenaria,mercenari[a-z]+,Mercenarix,\bmercenari[a-z]+\b
+mercenario,mercenari[a-z]+,Mercenarix,\bmercenari[a-z]+\b
+mercenarios,mercenari[a-z]+,Mercenarix,\bmercenari[a-z]+\b
+mercenaria,mercenari[a-z]+,Mercenarix,\bmercenari[a-z]+\b
+merece todo lo malo,merece.*(peor|malo),Mereces_lo_peor,\bmerece.*(peor|malo)\b
+merece todo lo peor,merece.*(peor|malo),Mereces_lo_peor,\bmerece.*(peor|malo)\b
+mesianicos,mesianic[a-z]+,Mesianicx,\bmesianic[a-z]+\b
+miauricio,miauricio,Miauricio,\bmiauricio\b
+sos terrible basu*a,so[n|s].*(mierda|caca),Mierda,\bso[n|s].*(mierda|caca)\b
+la mierda que sos,mierda.*(so[sn]|es),Mierda,\bmierda.*(so[sn]|es)\b
+pedazo de mierda,pedazo de (langosta|mierda)[s]?,Mierda,\bpedazo de (langosta|mierda)[s]?\b
+son la peor mierda,so[n|s].*(mierda|caca),Mierda,\bso[n|s].*(mierda|caca)\b
+son una mierda,so[n|s].*(mierda|caca),Mierda,\bso[n|s].*(mierda|caca)\b
+son una reverenda mierda,so[n|s].*(mierda|caca),Mierda,\bso[n|s].*(mierda|caca)\b
+sos una basura,so[n|s].*(mierda|caca),Mierda,\bso[n|s].*(mierda|caca)\b
+sos una caca,so[n|s].*(mierda|caca),Mierda,\bso[n|s].*(mierda|caca)\b
+sos una mierda,so[n|s].*(mierda|caca),Mierda,\bso[n|s].*(mierda|caca)\b
+todos la misma mierda,todos.*mierda,Mierda,\btodos.*mierda\b
+mierda de tipa,(mierda|miseria) de (tip[aos]+|persona),Mierda,\b(mierda|miseria) de (tip[aos]+|persona)\b
+miseria de persona,(mierda|miseria) de (tip[aos]+|persona),Mierda,\b(mierda|miseria) de (tip[aos]+|persona)\b
+militonto,militont[a-z]+,Militontx,\bmilitont[a-z]+\b
+militontos,militont[a-z]+,Militontx,\bmilitont[a-z]+\b
+miserable,miserable[s]?,Miserable,\bmiserable[s]?\b
+miserables,miserable[s]?,Miserable,\bmiserable[s]?\b
+mitomana,mitoman[a-z]+,Mitomanx,\bmitoman[a-z]+\b
+mitomanos,mitoman[a-z]+,Mitomanx,\bmitoman[a-z]+\b
+mogolica,mogolic[a-z]+,Mogolicx,\bmogolic[a-z]+\b
+mononeuronal,mononeuronal[es]*,Mononeuronal,\bmononeuronal[es]*\b
+monstruo,monstruo[s]?,Monstrux,\bmonstruo[s]?\b
+viejo mugriendo,mugrient[a-z]+,Mugrientx,\bmugrient[a-z]+\b
+mugrosos,mugros[a-z]+,Mugrientx,\bmugros[a-z]+\b
+nabo,nab[a-z]+,Nabx,\bnab[a-z]+\b
+nabos,nab[a-z]+,Nabx,\bnab[a-z]+\b
+pedazo de nabo,nab[a-z]+,Nabx,\bnab[a-z]+\b
+narco,narco[s]?,Narco,\bnarco[s]?\b
+necia,neci[a-z]+,Necix,\bneci[a-z]+\b
+necio,neci[a-z]+,Necix,\bneci[a-z]+\b
+gente nefasta,gente nefasta,Nefastx,\bgente nefasta\b
+flor de nefasta,nefast[a-z]+,Nefastx,\bnefast[a-z]+\b
+nefasta,nefast[a-z]+,Nefastx,\bnefast[a-z]+\b
+nefasto,nefast[a-z]+,Nefastx,\bnefast[a-z]+\b
+nefastos,nefast[a-z]+,Nefastx,\bnefast[a-z]+\b
+negreros,negrer[a-z]+,Nefastx,\bnegrer[a-z]+\b
+nene caprichoso,nen[a-z]+ caprichos[a-z]+,Nenx_caprichosx,\bnen[a-z]+ caprichos[a-z]+\b
+no jodas,no joda[sn]?,No_jodas,\bno joda[sn]?\b
+no servis para nada,no (servis|sirve|sirven) para nada,No_servis,\bno (servis|sirve|sirven) para nada\b
+no te da la nafta,no (te|le|les) da la nafta,No_servis,\bno (te|le|les) da la nafta\b
+no tiene decencia,no (tenes|tiene|tienen|tienes) (decencia),No_tenes_decencia,\bno (tenes|tiene|tienen|tienes) (decencia)\b
+no tiene dignidad,no (tenes|tiene|tienen|tienes) (dignidad),No_tenes_dignidad,\bno (tenes|tiene|tienen|tienes) (dignidad)\b
+no tienen moral,no (tenes|tiene|tienen|tienes) (moral),No_tenes_moral,\bno (tenes|tiene|tienen|tienes) (moral)\b
+no tenes cara,no (tenes|tiene|tienen|tienes) (cara|verguenza),No_tenes_vergenza,\bno (tenes|tiene|tienen|tienes) (cara|verguenza)\b
+no tenes corazon,no (tenes|tiene|tienen|tienes) (corazon),No_tenes_vergenza,\bno (tenes|tiene|tienen|tienes) (corazon)\b
+no tenes verguenza,no (tenes|tiene|tienen|tienes) (cara|verguenza),No_tenes_vergenza,\bno (tenes|tiene|tienen|tienes) (cara|verguenza)\b
+no tenes vergenza,no (tenes|tiene|tienen|tienes) (cara|verguenza),No_tenes_vergenza,\bno (tenes|tiene|tienen|tienes) (cara|verguenza)\b
+no tiene cara,no (tenes|tiene|tienen|tienes) (cara|verguenza),No_tenes_vergenza,\bno (tenes|tiene|tienen|tienes) (cara|verguenza)\b
+no tiene verguenza,no (tenes|tiene|tienen|tienes) (cara|verguenza),No_tenes_vergenza,\bno (tenes|tiene|tienen|tienes) (cara|verguenza)\b
+no tiene vergenza,no (tenes|tiene|tienen|tienes) (cara|verguenza),No_tenes_vergenza,\bno (tenes|tiene|tienen|tienes) (cara|verguenza)\b
+no tienen cara,no (tenes|tiene|tienen|tienes) (cara|verguenza),No_tenes_vergenza,\bno (tenes|tiene|tienen|tienes) (cara|verguenza)\b
+no tienen verguenza,no (tenes|tiene|tienen|tienes) (cara|verguenza),No_tenes_vergenza,\bno (tenes|tiene|tienen|tienes) (cara|verguenza)\b
+no tienen vergenza,no (tenes|tiene|tienen|tienes) (cara|verguenza),No_tenes_vergenza,\bno (tenes|tiene|tienen|tienes) (cara|verguenza)\b
+perdiste la vergenza,perd.*verguenza,No_tenes_vergenza,\bperd.*verguenza\b
+tienen la cara,tiene[ns]? la cara,No_tenes_vergenza,\btiene[ns]? la cara\b
+verguenza deberian tener,verguenza.*tener,No_tenes_vergenza,\bverguenza.*tener\b
+se le cae la cara,se le(s)? cae la cara,No_tenes_vergenza,\bse le(s)? cae la cara\b
+se les cae la cara,se le(s)? cae la cara,No_tenes_vergenza,\bse le(s)? cae la cara\b
+ñoqui,ñoquis[s]?,Ñoqui,\bñoquis[s]?\b
+ñoquis,ñoquis[s]?,Ñoqui,\bñoquis[s]?\b
+obsecuente,obsecuente[s]?,Obsecuente,\bobsecuente[s]?\b
+obtusos,obtus[a-z]+,Obtusx,\bobtus[a-z]+\b
+okupas,okup[a-z]+,Ocupas_anti-K,\bokup[a-z]+\b
+odiadora,odiador[a-z]*,Odiadorx,\bodiador[a-z]*\b
+odiadores seriales,odiador[a-z]*,Odiadorx,\bodiador[a-z]*\b
+oligarca,oligarca[s]?,Oligarca,\boligarca[s]?\b
+oportunistas,oportunista[s]?,Oportunista,\boportunista[s]?\b
+ordinaria,ordinari[a-z]+,Ordinarix,\bordinari[a-z]+\b
+ordinario,ordinari[a-z]+,Ordinarix,\bordinari[a-z]+\b
+otario,otari[a-z]+,Otarix,\botari[a-z]+\b
+pajero,pajer[a-z]+,Pajerx,\bpajer[a-z]+\b
+panfleto,panflet[a-z]+,Panfletx,\bpanflet[a-z]+\b
+panqq,(panqueque|panqq)[s]?,Panqueque,\b(panqueque|panqq)[s]?\b
+panqueque,(panqueque|panqq)[s]?,Panqueque,\b(panqueque|panqq)[s]?\b
+panqueques,(panqueque|panqq)[s]?,Panqueque,\b(panqueque|panqq)[s]?\b
+pankeke,pankeke[s],Panqueque_anti-K,\bpankeke[s]\b
+papanatas,papanata[s]?,Papanatas,\bpapanata[s]?\b
+parasitas,parasit[a-z]+,Parasitx,\bparasit[a-z]+\b
+parasito,parasit[a-z]+,Parasitx,\bparasit[a-z]+\b
+parasitos,parasit[a-z]+,Parasitx,\bparasit[a-z]+\b
+parasitos de cuarta,parasit[a-z]+,Parasitx,\bparasit[a-z]+\b
+paso por el orto,pas[a-z]+ por el (orto|culo|ogt|ojete),Paso_por_el_orto,\bpas[a-z]+ por el (orto|culo|ogt|ojete)\b
+patetica,patetic[a-z]+,Pateticx,\bpatetic[a-z]+\b
+patetico,patetic[a-z]+,Pateticx,\bpatetic[a-z]+\b
+pateticos,patetic[a-z]+,Pateticx,\bpatetic[a-z]+\b
+patotera,patoter[a-z]+,Patoterx,\bpatoter[a-z]+\b
+patotero,patoter[a-z]+,Patoterx,\bpatoter[a-z]+\b
+pavote,pavot[a-z]+,Pavote,\bpavot[a-z]+\b
+payasa,payas[a-z]+,Payasx,\bpayas[a-z]+\b
+payaso,payas[a-z]+,Payasx,\bpayas[a-z]+\b
+payasos,payas[a-z]+,Payasx,\bpayas[a-z]+\b
+pedofilo,pedofil[a-z]+,Pedofilx,\bpedofil[a-z]+\b
+pelmaso,pelmas[a-z]+,Pelmasx,\bpelmas[a-z]+\b
+pelot__o,pelot.*(o|os|a|as|e|es),Pelotudx,\bpelot.*(o|os|a|as|e|es)\b
+pelotuda,pelotud[a-z]+,Pelotudx,\bpelotud[a-z]+\b
+pelotudazo,pelotud[a-z]+,Pelotudx,\bpelotud[a-z]+\b
+pelotude,pelotud[a-z]+,Pelotudx,\bpelotud[a-z]+\b
+pelotudo,pelotud[a-z]+,Pelotudx,\bpelotud[a-z]+\b
+pelotudos,pelotud[a-z]+,Pelotudx,\bpelotud[a-z]+\b
+pelotudos de mierda,pelotud[a-z]+,Pelotudx,\bpelotud[a-z]+\b
+pelotudo,pelotud[a-z]+,Pelotudx,\bpelotud[a-z]+\b
+pendejo,pendej[a-z]+,Pendejx,\bpendej[a-z]+\b
+perdedor,perdedor[a-z]*,Perdedorx,\bperdedor[a-z]*\b
+peronchistas,peroch[a-z]*,Peronchx,\bperoch[a-z]*\b
+peroncho,peroch[a-z]*,Peronchx,\bperoch[a-z]*\b
+peroncho sucio,peroch[a-z]*,Peronchx,\bperoch[a-z]*\b
+peronchorros,peroch[a-z]*,Peronchx,\bperoch[a-z]*\b
+peronchos,peroch[a-z]*,Peronchx,\bperoch[a-z]*\b
+peronista de mierda,peronista de mierda,Peronchx,\bperonista de mierda\b
+perro arrastrado,perr[a-z]+ arrastrad[a-z]+,Perrx_falderx,\bperr[a-z]+ arrastrad[a-z]+\b
+perrito faldero,perr[a-z]+ falder[a-z]+,Perrx_falderx,\bperr[a-z]+ falder[a-z]+\b
+perverso,pervers[a-z]+,Perversx,\bpervers[a-z]+\b
+perversos,pervers[a-z]+,Perversx,\bpervers[a-z]+\b
+pesetera,peseter[a-z]+,Peseterx,\bpeseter[a-z]+\b
+peste,so[n|s].*(peste),Peste,\bso[n|s].*(peste)\b
+picaro,picar[a-z]+,Picarx,\bpicar[a-z]+\b
+pichona,pichon[a-z]+,Pichonx,\bpichon[a-z]+\b
+pilantra,pilantr[a-z]+,Pilantra,\bpilantr[a-z]+\b
+piojo resucitado,pioj[a-z]+,Piojo,\bpioj[a-z]+\b
+piojoso,pioj[a-z]+,Piojo,\bpioj[a-z]+\b
+planeros,planer[a-z]+,Planerx,\bplaner[a-z]+\b
+pobre ser,pobre ser,Pobre_ser,\bpobre ser\b
+politicuchos,politicuch[a-z]+,Politruchx,\bpoliticuch[a-z]+\b
+prepotente,prepotente[s]?,Prepotente,\bprepotente[s]?\b
+psicopata,psicopata[s]?,Psicopata,\bpsicopata[s]?\b
+psicopatas,psicopata[s]?,Psicopata,\bpsicopata[s]?\b
+pusilanime,pusilanime[s]?,Pusilanime,\bpusilanime[s]?\b
+putañero,putañer[a-z]+,Putañerx,\bputañer[a-z]+\b
+puta,(put[aeos]*|putit[a-z]+),Putx,\b(put[aeos]*|putit[a-z]+)\b
+puto arrepentido,(put[aeos]*|putit[a-z]+),Putx,\b(put[aeos]*|putit[a-z]+)\b
+que se jodan,que se (joda[n]?),Que_se_jodan,\bque se (joda[n]?)\b
+que se prendan fuego,que se (prenda[n]? fuego),Que_se_prendan_fuego,\bque se (prenda[n]? fuego)\b
+rascahuevos,rascahuevos,Rascahuevos,\brascahuevos\b
+rastreras,rastrer[a-z]+,Rastrerx,\brastrer[a-z]+\b
+rastrero,rastrer[a-z]+,Rastrerx,\brastrer[a-z]+\b
+rastrero de cuarta,rastrer[a-z]+,Rastrerx,\brastrer[a-z]+\b
+habitante de la cloaca,habitante[s]? de la cloaca,Rata,\bhabitante[s]? de la cloaca\b
+rata,rata[s]?,Rata,\brata[s]?\b
+rata inmunda,rata[s]?,Rata,\brata[s]?\b
+ratas,rata[s]?,Rata,\brata[s]?\b
+rata de cloaca,rata[s]?,Rata,\brata[s]?\b
+rey de la saraza,rey de la saraza,Reinx_de_la_sarasa,\brey de la saraza\b
+relateros de cuarta,relater[a-z]+,Relaterx,\brelater[a-z]+\b
+repara ojetes,repara ojetes,Repara_ojetes,\brepara ojetes\b
+represores,represor[a-z]+,Represores,\brepresor[a-z]+\b
+repugnante,repugnante[s]?[ ser[es]*]?,Repugnante,\brepugnante[s]?[ ser[es]*]?\b
+repugnante ser,repugnante[s]?[ ser[es]*]?,Repugnante,\brepugnante[s]?[ ser[es]*]?\b
+repugnantes,repugnante[s]?[ ser[es]*]?,Repugnante,\brepugnante[s]?[ ser[es]*]?\b
+resentida,resentid[a-z]+,Resentidx,\bresentid[a-z]+\b
+resentidas,resentid[a-z]+,Resentidx,\bresentid[a-z]+\b
+resentidos,resentid[a-z]+,Resentidx,\bresentid[a-z]+\b
+retrasada,retrasad[a-z]+( mental[es]*)?,Retrasadx,\bretrasad[a-z]+( mental[es]*)?\b
+retrasada mental,retrasad[a-z]+( mental[es]*)?,Retrasadx,\bretrasad[a-z]+( mental[es]*)?\b
+ridicula,ridicul[a-z]+,Ridiculx,\bridicul[a-z]+\b
+ridicula de morondanga,ridicul[a-z]+,Ridiculx,\bridicul[a-z]+\b
+ridiculo,ridicul[a-z]+,Ridiculx,\bridicul[a-z]+\b
+ridiculos,ridicul[a-z]+,Ridiculx,\bridicul[a-z]+\b
+nos estan rompiendo el orto,romp[a-z]+ el (orto|ogt|culo|ojete),Romper_el_orto,\bromp[a-z]+ el (orto|ogt|culo|ojete)\b
+le rompen el culo,rompe.*(culo|ogt|ojete|orto)[s]?,Romper_el_orto,\brompe.*(culo|ogt|ojete|orto)[s]?\b
+le rompen el ogt,rompe.*(culo|ogt|ojete|orto)[s]?,Romper_el_orto,\brompe.*(culo|ogt|ojete|orto)[s]?\b
+salame,salame[s]?,Salame,\bsalame[s]?\b
+sangaletones,sangaleton(es)?,Sangaleton,\bsangaleton(es)?\b
+sanganos,sangano(s)?,Sanganx,\bsangano(s)?\b
+sanguijuela,sanguijuela(s)?,Sanguijuela,\bsanguijuela(s)?\b
+sanguijuela mugrienta,sanguijuela(s)?,Sanguijuela,\bsanguijuela(s)?\b
+saqueadores,saqueador[a-z]+,Saqueadorx,\bsaqueador[a-z]+\b
+satrapas,satrapa(s)?,Satrapa,\bsatrapa(s)?\b
+serpientes,serpiente(s)?,Serpiente,\bserpiente(s)?\b
+shhh,sh(h)+,Shh,\bsh(h)+\b
+sicarios,sicari[a-z]+,Sicarix,\bsicari[a-z]+\b
+ser siniestro,ser(es)? (despreciable|inmundo|siniestro|horrible)(s)?,Siniestrx,\bser(es)? (despreciable|inmundo|siniestro|horrible)(s)?\b
+siniestros,siniestr[a-z]+,Siniestrx,\bsiniestr[a-z]+\b
+sin escrupulos,sin escrupulos,Sinverguenza,\bsin escrupulos\b
+sin vergenza,sin verguenza(s)?,Sinverguenza,\bsin verguenza(s)?\b
+sin-ver-guen-zas,sin.*ver.*guen.*za(s)?,Sinverguenza,\bsin.*ver.*guen.*za(s)?\b
+sinverguenza,sin.*ver.*guen.*za(s)?,Sinverguenza,\bsin.*ver.*guen.*za(s)?\b
+sinverguenzas,sin.*ver.*guen.*za(s)?,Sinverguenza,\bsin.*ver.*guen.*za(s)?\b
+soberbia,soberbi[a-z]+,Soberbix,\bsoberbi[a-z]+\b
+soberbio,soberbi[a-z]+,Soberbix,\bsoberbi[a-z]+\b
+sociopata,sociopata(s)?,Sociopata,\bsociopata(s)?\b
+manga de soretes,soret[a-z]+,Soretx,\bsoret[a-z]+\b
+pedazo de sorete,soret[a-z]+,Soretx,\bsoret[a-z]+\b
+soreta,soret[a-z]+,Soretx,\bsoret[a-z]+\b
+sorete,soret[a-z]+,Soretx,\bsoret[a-z]+\b
+sorete mal cagado,soret[a-z]+,Soretx,\bsoret[a-z]+\b
+soretes,soret[a-z]+,Soretx,\bsoret[a-z]+\b
+soretita,soret[a-z]+,Soretx,\bsoret[a-z]+\b
+succionadora,succionador[a-z]+,Succionadorx,\bsuccionador[a-z]+\b
+tarada a cuerda,tarad[a-z]+,Taradx,\btarad[a-z]+\b
+tarada mental,tarad[a-z]+,Taradx,\btarad[a-z]+\b
+taradito,tarad[a-z]+,Taradx,\btarad[a-z]+\b
+tarado,tarad[a-z]+,Taradx,\btarad[a-z]+\b
+tarados,tarad[a-z]+,Taradx,\btarad[a-z]+\b
+termos,termo(s)?,Termo,\btermo(s)?\b
+terrorista,terrorista(s)?,Terrorista,\bterrorista(s)?\b
+terroristas,terrorista(s)?,Terrorista,\bterrorista(s)?\b
+terroristas de estado,terrorista(s)?,Terrorista,\bterrorista(s)?\b
+tibios,tibi[a-z]+,Tibix,\btibi[a-z]+\b
+tilingos,tiling[a-z]+,Tilingx,\btiling[a-z]+\b
+titere,titere(s)?,Titere,\btitere(s)?\b
+titeres,titere(s)?,Titere,\btitere(s)?\b
+tomarnos de boludos,tomar(me|nos|te|l[aeo](s)?) (de|por) bolud[a-z]+,Tomarme_de_boludx,\btomar(me|nos|te|l[aeo](s)?) (de|por) bolud[a-z]+\b
+tonta,tont[a-z]+,Tontx,\btont[a-z]+\b
+totalitario,totalitari[a-z]+,Totalitarix,\btotalitari[a-z]+\b
+traga sables,traga( )?sables,Tragasables,\btraga( )?sables\b
+tragasables,traga( )?sables,Tragasables,\btraga( )?sables\b
+traicionera,traicioner[a-z]+,Traicionerx,\btraicioner[a-z]+\b
+traidor,traidor[a-z]*,Traidorx,\btraidor[a-z]*\b
+traidora,traidor[a-z]*,Traidorx,\btraidor[a-z]*\b
+traidores,traidor[a-z]*,Traidorx,\btraidor[a-z]*\b
+traidores a la patria,traidor[a-z]*,Traidorx,\btraidor[a-z]*\b
+tramposo,trampos[a-z]+,Tramposx,\btrampos[a-z]+\b
+tramposos,trampos[a-z]+,Tramposx,\btrampos[a-z]+\b
+tranfugas,tranfuga(s)?,Tranfugx,\btranfuga(s)?\b
+troll,troll[es]*,Troll,\btroll[es]*\b
+troll de mierda,troll[es]*,Troll,\btroll[es]*\b
+trolles,troll[es]*,Troll,\btroll[es]*\b
+trolls,troll[es]*,Troll,\btroll[es]*\b
+retrolazo,(re)?trolazo[s]?,Trolx,\b(re)?trolazo[s]?\b
+trolo,trol[aeo](s)?,Trolx,\btrol[aeo](s)?\b
+trucha,truch[a-z]+,Truchx,\btruch[a-z]+\b
+trucho,truch[a-z]+,Truchx,\btruch[a-z]+\b
+truchos,truch[a-z]+,Truchx,\btruch[a-z]+\b
+tuerto,tuert[a-z]+,Tuertx,\btuert[a-z]+\b
+turra,turr[a-z]+,Turrx,\bturr[a-z]+\b
+vaca,vaca(s)?,Vaca,\bvaca(s)?\b
+vaga,vag[a-z]+,Vagx,\bvag[a-z]+\b
+vagabundo,vag[a-z]+,Vagx,\bvag[a-z]+\b
+vago,vag[a-z]+,Vagx,\bvag[a-z]+\b
+vagos,vag[a-z]+,Vagx,\bvag[a-z]+\b
+manga de vagos,vag[aueos]*,Vagx,\bvag[aueos]*\b
+veleta,veleta(s)?,Veleta,\bveleta(s)?\b
+vende humo,vende( )?humo,Vendehumo,\bvende( )?humo\b
+vendehumo,vende( )?humo,Vendehumo,\bvende( )?humo\b
+vende patria,vende( )?patria(s)?,Vendepatria,\bvende( )?patria(s)?\b
+vende patria de mierda,vende( )?patria(s)?,Vendepatria,\bvende( )?patria(s)?\b
+vende patrias,vende( )?patria(s)?,Vendepatria,\bvende( )?patria(s)?\b
+vendida,vendid[a-z]+,Vendidx,\bvendid[a-z]+\b
+vendido,vendid[a-z]+,Vendidx,\bvendid[a-z]+\b
+ventajero,ventajer[a-z]+,Ventajerx,\bventajer[a-z]+\b
+son una verguenza,so[n|s].*(verguenza),Vergenza,\bso[n|s].*(verguenza)\b
+sos una verguenza,so[n|s].*(verguenza),Vergenza,\bso[n|s].*(verguenza)\b
+sos una vergenza,so[n|s].*(verguenza),Vergenza,\bso[n|s].*(verguenza)\b
+vibora,vibora(s)?,Vibora,\bvibora(s)?\b
+vejetes,vejet[a-z]+,Viejx,\bvejet[a-z]+\b
+viejos chotos,viej[aoe](s)? chot[a-z]+,Viejx,\bviej[aoe](s)? chot[a-z]+\b
+viejo ciruja,viej[aoe](s)? ciruja(s)?,Viejx,\bviej[aoe](s)? ciruja(s)?\b
+viejo rancio,viej[aoe](s)? ranci[a-z]+,Viejx,\bviej[aoe](s)? ranci[a-z]+\b
+vil,vil,Vil,\bvil\b
+villera de cuarta,viller[a-z]+,Villerx,\bviller[a-z]+\b
+violentos,violent[a-z]+,Violentx,\bviolent[a-z]+\b
+vomito con patas,vomito con patas,Vomito_con_patas,\bvomito con patas\b
+vulgar,vulgar(es)?,Vulgar,\bvulgar(es)?\b
+yegua,yegua(s)?,Yegua,\byegua(s)?\b
+zangana,zangan[a-z]+,Zanganx,\bzangan[a-z]+\b
+zanganos,zangan[a-z]+,Zanganx,\bzangan[a-z]+\b
+zoquete,zoquete(s)?,Zoquetx,\bzoquete(s)?\b
+zorras,zorr[a-z]+,Zorrx,\bzorr[a-z]+\b
+zorros,zorr[a-z]+,Zorrx,\bzorr[a-z]+\b
+zurdo con osde,zurd[a-z]+ con osde,Zurdx_con_osde,\bzurd[a-z]+ con osde\b
+zurda guerrillera,zurd[a-z]+ guerriller[a-z]+,Zurdx_guerrillerx,\bzurd[a-z]+ guerriller[a-z]+\b
