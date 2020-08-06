@@ -1,0 +1,296 @@
+---
+title: "topic_model"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r cars}
+library("quanteda", quietly = TRUE, warn.conflicts = FALSE, verbose = FALSE)
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(ggplot2)
+library(ggpubr)
+library(stm)
+library(reshape2)
+```
+
+# Choosing best model
+
+```{r}
+df_dir_at_congress <- read.csv("tweets_for_stm3.csv", stringsAsFactors = FALSE)
+df_dir_at_congress <- df_dir_at_congress[df_dir_at_congress$target_precision == "High", ]
+
+
+tcorp <- corpus(df_dir_at_congress$text)
+stopwords_spanish <- c(stopwords("spanish"),
+                       c("https", "t.co", "rt", "vos", "sos", "usted", "q", "x", "xq", "dsd", "d"))
+
+dfm_at <- tokens(tcorp, remove_punct = TRUE) %>%
+  dfm(tolower = TRUE, remove_numbers = TRUE,
+      remove = stopwords_spanish)
+
+cdfm <- dfm_trim(dfm_at, min_docfreq = 20)
+
+doc_ntokens <- rowSums(cdfm)
+drop_idx <- which(doc_ntokens==0)
+
+cdfm <- cdfm[-drop_idx,]
+
+interbloque <- as.numeric(as.factor(df_dir_at_congress$directed_at_interbloque))[-drop_idx]
+gender <- as.numeric(as.factor(df_dir_at_congress$directed_at_gender))[-drop_idx]
+meta <- data.frame(interbloque, gender)
+
+load("stm-output_30.Rdata")
+load("stm-output_40.Rdata")
+load("stm-output_50.Rdata")
+load("stm-output_60.Rdata")
+
+
+load("many_models.Rdata")
+#heldout <- make.heldout(cdfm)
+#save(heldout, file="heldout.Rdata")
+load("heldout.Rdata")
+```
+
+```{r}
+print('exclusivity')
+exclusivity <- c(
+mean(exclusivity(stm.30)),
+mean(exclusivity(stm.40)),
+mean(exclusivity(stm.50)),
+mean(exclusivity(stm.60)))
+
+
+print('semantic coherente')
+semantic_coherence <- c(
+mean(semanticCoherence(stm.30, cdfm)),
+mean(semanticCoherence(stm.40, cdfm)),
+mean(semanticCoherence(stm.50, cdfm)),
+mean(semanticCoherence(stm.60, cdfm)))
+
+print('lower bound')
+lower_bound <- c(
+max(stm.30$convergence$bound) + lfactorial(stm.30$settings$dim$K),
+max(stm.40$convergence$bound) + lfactorial(stm.40$settings$dim$K),
+max(stm.50$convergence$bound) + lfactorial(stm.40$settings$dim$K),
+max(stm.60$convergence$bound) + lfactorial(stm.40$settings$dim$K))
+
+print('expected heldout')
+expected_heldout <- c(
+eval.heldout(stm.30, heldout$missing)$expected.heldout,
+eval.heldout(stm.40, heldout$missing)$expected.heldout,
+eval.heldout(stm.50, heldout$missing)$expected.heldout,
+eval.heldout(stm.60, heldout$missing)$expected.heldout)
+
+value <- c(exclusivity,semantic_coherence,lower_bound,expected_heldout)
+value
+```
+
+```{r}
+options(scipen=999)
+evaluation <- data.frame(K = rep(c(30,40,50,60),4),
+                         Metric = c(rep("Exclusivity",4),rep("Semantic Coherence",4),rep("Lower bound",4),rep("Expected heldout",4)), 
+                         Value = value)
+
+evaluation <- with(evaluation, evaluation[order(Metric),])
+evaluation
+```
+
+
+```{r}
+evaluation %>%
+  ggplot(aes(K, Value, color = Metric)) +
+  geom_line(size = 1.5, alpha = 0.7, show.legend = FALSE) +
+  facet_wrap(~Metric, scales = "free_y") +
+  labs(x = "K (number of topics)",
+       y = NULL,
+       title = "Model diagnostics by number of topics") +
+  theme(plot.title = element_text(size = 14, hjust = 0.5))
+
+```
+
+```{r}
+k = 50
+selected_model <- stm.50
+
+# Choosing model where the held out likelihood is high as well as exclusivity and lower bound. Even thoguh the semantic coherence is low, this is easily achievable by having large groups with lots of documents (as is the case for 30, 40, 50). 60 has a better topic distribution.
+```
+
+```{r}
+est <- estimateEffect(~gender, selected_model,
+    uncertainty="None")
+coef <- se <- rep(NA, k)
+for (i in 1:k){
+    coef[i] <- est$parameters[[i]][[1]]$est[2]
+    se[i] <- sqrt(est$parameters[[i]][[1]]$vcov[2,2])
+}
+
+df <- data.frame(topic = 1:k, coef=coef, se=se)
+df
+```
+
+```{r}
+df2 <- rbind(head(df[order(df$coef),],5), tail(df[order(df$coef),],5)) 
+colors <- ifelse(df2$coef > 0, "#F8766A", "#00BFC4")
+
+labels <- c("Shut up, you, government, fake contributors",
+            "Go to prison",
+            "Shameless, hipocrit, b*tch",
+            "Lower salary, money, taxes, poor",
+            "Homeland, god, hopefully",
+            "Right, Left, Judge",
+            "Corrupt, Traitor, Worst",
+            "Thanks, Support, Congratulations",
+            "Hunger, Infrastructure, Water, City, State",
+            "Deputy, Embassdor, Secretary, Scioli, Resign")
+
+ggplot(data = df2,
+       aes(x = reorder(topic, coef), y = coef, fill = colors))+
+  geom_bar(stat = "identity")+
+  ggtitle("Topics with the highest estimated effects by gender") +
+  scale_x_discrete(labels=c(labels)) +
+  scale_fill_discrete(name = "",labels = c("F", "M")) +
+  labs(y = "Estimated effect", x = "Topic name") +
+  theme(legend.position = "bottom",
+        plot.title = element_text(hjust = 0.5)) +
+  coord_flip() 
+```
+
+```{r}
+tail(df[order(df$coef),],5)
+labelTopics(selected_model, topics=18)
+labelTopics(selected_model, topics=30)
+labelTopics(selected_model, topics=12)
+labelTopics(selected_model, topics=45)
+labelTopics(selected_model, topics=5)
+```
+
+```{r}
+labelTopics(selected_model)
+```
+
+```{r}
+labels_words = list()
+for (i in 1:k){
+  labels_words[[i]] = paste(labelTopics(selected_model, 1:k, n = 5)$prob[i,1:5], collapse = ", ")
+}
+labels_words <- unlist(labels_words)
+df$labels_words <- labels_english
+df <- df[order(coef),]
+df$labels_words <- paste(df$topic, "-", df$labels_words)
+df2 <- rbind(head(df,15),tail(df,15))
+colors <- ifelse(df2$coef > 0, "#F8766A", "#00BFC4")
+ggplot(data = df2,
+       aes(x = reorder(topic, coef), y = coef, fill=colors))+
+  geom_bar(stat = "identity")+
+  ggtitle("Top 30 topics ordered by gender effect") +
+  scale_x_discrete(labels=df2$labels_words) +
+  scale_fill_discrete(name = "",labels = c("F", "M")) +
+  labs(y = "Estimated effect", x = "Topic name") +
+  theme(legend.position = "bottom",
+        plot.title = element_text(hjust = 0.5)) +
+  coord_flip()
+
+```
+
+```{r}
+# Create df with translations
+labels_words = list()
+for (i in 1:k){
+  labels_words[[i]] = paste(labelTopics(selected_model, 1:k, n = 10)$prob[i,1:10], collapse = ", ")
+}
+labels_words <- unlist(labels_words)
+df$labels_words <- labels_words
+head(df)
+
+write.csv(df, file="stm_topics.csv")
+```
+
+
+```{r}
+labels_words = list()
+for (i in 1:k){
+  labels_words[[i]] = paste(labelTopics(selected_model, 1:k, n = 5)$prob[i,1:5], collapse = ", ")
+}
+labels_words <- unlist(labels_words)
+df$labels_words <- labels_english
+df <- df[order(coef),]
+df$labels_words <- paste(df$topic, "-", df$labels_words)
+df2 <- rbind(head(df,15),tail(df,15))
+colors <- ifelse(df2$coef > 0, "#F8766A", "#00BFC4")
+ggplot(data = df2,
+       aes(x = reorder(topic, coef), y = coef, fill=colors))+
+  geom_bar(stat = "identity")+
+  ggtitle("Top 30 topics ordered by gender covariate effect") +
+  scale_x_discrete(labels=df2$labels_words) +
+  scale_fill_discrete(name = "",labels = c("F", "M")) +
+  labs(y = "Estimated effect", x = "Topic name") +
+  theme(legend.position = "right",
+        plot.title = element_text(hjust = 0.5)) +
+  coord_flip()
+
+head(df)
+```
+
+
+```{r}
+plot(selected_model, type = "summary", text.cex = 0.5)
+```
+
+```{r}
+topics <- max.col(selected_model$theta)
+df_gender <- data.frame(gender=df_dir_at_congress$directed_at_gender[-drop_idx],
+                        text=df_dir_at_congress$text[-drop_idx],
+                        screen_name=df_dir_at_congress$directed_at_screen_name[-drop_idx],
+                        topics)
+df_gender <- df_gender[order(df_gender$topics, decreasing = FALSE),]
+
+df_gender[df_gender$topics == '4',]
+```
+
+```{r, fig.height=10, fig.width=10}
+topics_gender <- df_gender %>%
+  group_by(topics,gender) %>%
+  summarise(count=n()) %>% 
+  mutate(perc=count/sum(count)*100)
+
+colors <- df_gender %>%
+  group_by(topics) %>%
+  count(gender) %>%
+  group_by(topics) %>%
+  mutate(percent = n/sum(n)) %>%
+  filter(gender == "F")
+
+colors <- colors[(colors$percent > 0.6) | (colors$percent < 0.4),]
+keep_topics <- colors$topics
+female_topics <- colors[(colors$percent > 0.7), "topics"]
+female_topics <- female_topics$topics 
+male_topics <- colors[(colors$percent < 0.4), "topics"]
+male_topics <- male_topics$topics
+colors <- ifelse(colors$percent > 0.70, "#F8766A", ifelse(colors$percent < 0.30, "#00BFC4", "black"))
+
+
+labels_words = list()
+for (i in 1:k){
+  labels_words[[i]] = paste(labelTopics(selected_model, 1:k, n = 10)$prob[i,1:3], collapse = ", ")
+}
+labels_words <- unlist(labels_words)
+
+ggplot(topics_gender[topics_gender$topics %in% keep_topics,],
+       aes(reorder(topics, desc(topics)), y = count, fill = gender)) +
+  geom_bar(stat = "identity") +
+  scale_x_discrete(breaks = 1:k, labels=c(labels_words)) +
+  geom_hline(yintercept=50, linetype="dotted") + 
+            coord_flip() +
+  labs(y = "Number of directed tweets", x = "") +
+  ggtitle("Topics distribution") +
+  theme(legend.position = "bottom",
+         axis.text.y = element_text(colour = colors, size = 12),
+        plot.title = element_text(hjust = 0.5))
+
+```
+
