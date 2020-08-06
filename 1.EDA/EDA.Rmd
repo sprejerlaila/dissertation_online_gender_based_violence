@@ -1,0 +1,200 @@
+---
+title: "EDA"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+ 
+```{r}
+library("quanteda", quietly = TRUE, warn.conflicts = FALSE, verbose = FALSE)
+library(dplyr)
+library(tidyr)
+library(stringr)
+library(ggplot2)
+library(ggpubr)
+library(reshape2)
+require(scales)
+setwd('1.EDA')
+```
+
+```{r}
+metadata <- read.csv("0.data/metadata.csv", stringsAsFactors=F)
+head(metadata)
+```
+
+
+```{r}
+summary(metadata[metadata$statuses_count > 0,])
+```
+
+
+```{r}
+tw <- read.csv("0.data/congress_tweets_full_targets_without_text.csv", stringsAsFactors=F)
+```
+
+```{r}
+mentioned <- tw %>%
+  group_by(directed_at_screen_name) %>%
+  summarise(counts = n()) %>%
+  arrange(desc(counts))
+names(mentioned) <- c('screen_name','mentioned_count')
+
+written <- tw[tw$screen_name %in% metadata$screen_name,] %>%
+  group_by(screen_name) %>%
+  summarise(counts = n()) %>%
+  arrange(desc(counts))
+names(written) <- c('screen_name','written_count')
+
+metadata <- merge(metadata, mentioned, on='screen_name',how='left', all.x = TRUE)
+metadata <- merge(metadata, written, on='screen_name',how='left', all.x = TRUE)
+```
+
+```{r}
+descriptive_stats <- melt(metadata[c('screen_name','followers_count','mentioned_count','written_count')],
+            id.vars = "screen_name",
+            value.name = "n",
+            variable.name = "variable")
+
+boxplots <- ggplot(descriptive_stats, aes(x = "", y = n)) + #, fill=directed_at_gender)) +
+  geom_boxplot(show.legend = TRUE) + 
+  facet_wrap(~variable, ncol=1, scales="free") + 
+  scale_y_continuous(labels = comma) +
+  labs(x = "",
+       y = "Count") +
+  theme(legend.position = "None",
+        plot.title = element_text(hjust = 0.5)) +
+  coord_flip()
+
+```
+
+```{r}
+histograms <- ggplot(descriptive_stats, aes(x = n)) + #, fill=directed_at_gender)) +
+  geom_histogram(show.legend = TRUE) + 
+  facet_wrap(~variable, ncol=3, scales="free") + 
+  scale_x_log10() +
+  labs(x = "Log(count)",
+       y = "")+
+  theme(legend.position = "None",
+        plot.title = element_text(hjust = 0.5))
+```
+
+```{r}
+figure <- ggarrange(boxplots, histograms,
+                    label.y = 1,
+                    ncol = 2)
+
+
+
+annotate_figure(figure, top = text_grob("Distribution of Twitter activity",
+                                        face = "bold", size = 14))
+```
+
+
+```{r}
+summary(metadata)
+```
+
+
+```{r}
+table(metadata$interbloque)
+```
+
+```{r}
+all_from <- tw[tw$screen_name_type %in% c("D","S"),]
+all_to <- tw[tw$directed_at_congress %in% c("D","S"),]
+```
+
+```{r}
+table(metadata$gender)
+table(all_from$screen_name_gender)
+table(all_to$directed_at_gender)
+
+prop.table(table(metadata$gender))*100
+prop.table(table(all_from$screen_name_gender))*100
+prop.table(table(all_to$directed_at_gender))*100
+```
+
+
+```{r}
+table(metadata$interbloque)
+table(all_from$screen_name_interbloque)
+table(all_to$directed_at_interbloque)
+
+prop.table(table(metadata$interbloque))*100
+prop.table(table(all_from$screen_name_interbloque))*100
+prop.table(table(all_to$directed_at_interbloque))*100
+```
+
+
+```{r}
+require(scales)
+order_directed <- all_to %>%
+  count(directed_at_screen_name, directed_at_interbloque) %>%
+  top_n(n=20, n) %>%
+  arrange(n)
+
+color_interbloque <- order_directed$directed_at_interbloque
+order_directed <- as.factor(order_directed$directed_at_screen_name)
+
+plot_from <- all_from[all_from$screen_name %in% order_directed,] %>%
+  count(screen_name, screen_name_interbloque) %>%
+  ggplot(., aes(x=factor(screen_name, levels = order_directed), y=n, fill = screen_name_interbloque)) +
+  scale_fill_manual("", values = c("Frente de Todos" = "#619CFF",
+                                   "Juntos por el Cambio" = "#F5BD1F",
+                                   "PTS -Frente de Izquierda" = "#F8766D",
+                                   "Federal" = "#7CAE00"))+
+  scale_y_continuous(breaks = c(0,500,1000,1500,2000), labels = comma)+
+  geom_bar(stat='identity', show.legend = FALSE) +
+  labs(x = "",
+       y = "",
+       title = "Written tweets") +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  coord_flip()
+
+plot_directed <- all_to %>%
+  count(directed_at_screen_name, directed_at_interbloque) %>%
+  top_n(n=20, n) %>%
+  ggplot(., aes(x=factor(directed_at_screen_name, levels = order_directed), y=n, fill = directed_at_interbloque)) +
+  scale_fill_manual("", values = c("Frente de Todos" = "#619CFF",
+                                   "Juntos por el Cambio" = "#F5BD1F",
+                                   "PTS -Frente de Izquierda" = "#F8766D",
+                                   "Federal" = "#7CAE00"))+
+  geom_bar(stat='identity', show.legend = FALSE) +
+  scale_y_continuous(breaks = c(0,50000,100000,150000), labels = comma)+
+  labs(x = "",
+       y = "",
+       title = "Mentioned tweets") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  coord_flip()
+
+plot_followers <- metadata[metadata$screen_name %in% order_directed,] %>%
+  ggplot(., aes(x=factor(screen_name, levels = order_directed), y=followers_count, fill = interbloque)) +
+  scale_fill_manual("", values = c("Frente de Todos" = "#619CFF",
+                                   "Juntos por el Cambio" = "#F5BD1F",
+                                   "PTS -Frente de Izquierda" = "#F8766D",
+                                   "Federal" = "#7CAE00")) +
+  scale_y_continuous(breaks = c(0,500000,1000000), labels = comma)+
+  geom_bar(stat='identity', show.legend = FALSE) +
+  labs(x = "",
+       y = "",
+       title = "Number of followers") +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  coord_flip()
+
+figure2 <- ggarrange(plot_directed, plot_from, plot_followers,
+                    label.y = 1,
+                    widths = c(1.5,1,1),
+                    nrow = 1)
+
+figure2
+```
+
+
